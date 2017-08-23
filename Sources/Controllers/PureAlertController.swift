@@ -11,11 +11,15 @@ import UIKit
 public protocol PureAlertControllerDelegate: class {
     func alertView(_ alertView: PureAlertView, didClickCancelButton cancelButton: UIButton)
     func alertView(_ alertView: PureAlertView, didClickConfirmButton confirmButton: UIButton)
+    func alertView(_ alertView: PureAlertView, didTapNonButtonArea area: UIView?)
+    func alertView(_ alertView: PureAlertView, didTapOutsideArea area: UIView?)
 }
 
 public extension PureAlertControllerDelegate {
     func alertView(_ alertView: PureAlertView, didClickCancelButton cancelButton: UIButton) { }
     func alertView(_ alertView: PureAlertView, didClickConfirmButton confirmButton: UIButton) { }
+    func alertView(_ alertView: PureAlertView, didTapNonButtonArea area: UIView?) { }
+    func alertView(_ alertView: PureAlertView, didTapOutsideArea area: UIView?) { }
 }
 
 open class PureAlertController: UIViewController {
@@ -58,7 +62,12 @@ open class PureAlertController: UIViewController {
         window.makeKeyAndVisible()
         window.rootViewController = UIViewController()
         window.rootViewController?.view.frame = UIScreen.main.bounds
-        window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.6)
+        window.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(outsideAreaTapped(sender:))))
+    }
+    
+    @objc private func outsideAreaTapped(sender recognizer: UIGestureRecognizer) {
+        delegate?.alertView(alertView, didTapOutsideArea: recognizer.view)
     }
     
     private func loadAlertView() {
@@ -72,5 +81,15 @@ open class PureAlertController: UIViewController {
 }
 
 extension PureAlertController: PureAlertViewDelegate {
+    func alertView(_ alertView: PureAlertView, didTapNonButtonArea area: UIView?) {
+        delegate?.alertView(alertView, didTapNonButtonArea: area)
+    }
     
+    func alertView(_ alertView: PureAlertView, didTapCancelButton cancelButton: UIButton) {
+        delegate?.alertView(alertView, didClickCancelButton: cancelButton)
+    }
+    
+    func alertView(_ alertView: PureAlertView, didTapConfirmButton confirmButton: UIButton) {
+        delegate?.alertView(alertView, didClickConfirmButton: confirmButton)
+    }
 }

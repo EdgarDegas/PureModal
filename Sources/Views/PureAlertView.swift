@@ -27,14 +27,10 @@ public enum PureAlertViewStyle {
     case dialogue(cancelButtonTitle: String?, confirmButtonTitle: String?)
 }
 
-public protocol PureAlertViewDelegate: class {
-    func alertView(_ alertView: PureAlertView, didClickCancelButton cancelButton: UIButton)
-    func alertView(_ alertView: PureAlertView, didClickConfirmButton confirmButton: UIButton)
-}
-
-public extension PureAlertViewDelegate {
-    func alertView(_ alertView: PureAlertView, didClickCancelButton cancelButton: UIButton) { }
-    func alertView(_ alertView: PureAlertView, didClickConfirmButton confirmButton: UIButton) { }
+protocol PureAlertViewDelegate: class {
+    func alertView(_ alertView: PureAlertView, didTapCancelButton cancelButton: UIButton)
+    func alertView(_ alertView: PureAlertView, didTapConfirmButton confirmButton: UIButton)
+    func alertView(_ alertView: PureAlertView, didTapNonButtonArea area: UIView?)
 }
 
 open class PureAlertView: UIView {
@@ -98,9 +94,15 @@ open class PureAlertView: UIView {
     }
     
     private func setupAppearance() {
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(nonButtonAreaTapped(sender:))))
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 12
         backgroundColor = UIColor.white
+    }
+    
+    @objc private func nonButtonAreaTapped(sender recognizer: UIGestureRecognizer) {
+        delegate?.alertView(self, didTapNonButtonArea: recognizer.view)
+        print("nonButtonAreaTapped")
     }
     
     private func loadDefaultAlertView() {
