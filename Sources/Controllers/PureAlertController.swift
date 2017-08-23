@@ -22,6 +22,7 @@ open class PureAlertController: UIViewController {
     
     // MARK: - Variables and Interface
     
+    var tintColor: UIColor?
     var window: UIWindow!
 //    var alertView: UIView!
     var alertView: PureAlertView!
@@ -61,7 +62,10 @@ open class PureAlertController: UIViewController {
     }
     
     private func loadAlertView() {
-        alertView = PureAlertView(withTitle: "Title", message: "messagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessage", style: .default(buttonTitle: "OK"))
+        alertView = PureAlertView(withTitle: "标题", message: "标准样式模态框，带一个标题，一个消息，一个按钮", style: .default(buttonTitle: "完成"))
+        if let tintColor = tintColor {
+            alertView.tintColor = tintColor
+        }
         alertView.delegate = self
         alertView.addTo(view: window)
     }
