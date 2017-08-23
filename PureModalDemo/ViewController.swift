@@ -15,7 +15,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let alertController = PureAlertController()
-        alertController.tintColor = UIColor.darkText
         alertController.modal(for: self)
     }
 
@@ -27,3 +26,8 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController: PureAlertControllerDelegate {
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didClickCancelButton cancelButton: UIButton) {
+        <#code#>
+    }
+}

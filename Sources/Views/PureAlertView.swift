@@ -109,6 +109,7 @@ open class PureAlertView: UIView {
                 cancelButton = UIButton(type: .system)
                 cancelButton?.setTitle("Cancel", for: .normal)
             }
+            cancelButton?.addTarget(self, action: #selector(cancelButtonTapped(sender:)), for: .touchUpInside)
             cancelButton?.translatesAutoresizingMaskIntoConstraints = false
             addSubview(cancelButton!)
             cancelButton?.topAnchor.constraint(equalTo: topToAnchor, constant: 20)
@@ -161,5 +162,11 @@ open class PureAlertView: UIView {
         } else {
             return stackView
         }
+    }
+}
+
+extension PureAlertView {
+    @objc private func cancelButtonTapped(sender button: UIButton) {
+        delegate?.alertView(self, didTapCancelButton: button)
     }
 }

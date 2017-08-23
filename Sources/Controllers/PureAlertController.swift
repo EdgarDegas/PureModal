@@ -9,17 +9,17 @@
 import UIKit
 
 public protocol PureAlertControllerDelegate: class {
-    func alertView(_ alertView: PureAlertView, didClickCancelButton cancelButton: UIButton)
-    func alertView(_ alertView: PureAlertView, didClickConfirmButton confirmButton: UIButton)
-    func alertView(_ alertView: PureAlertView, didTapNonButtonArea area: UIView?)
-    func alertView(_ alertView: PureAlertView, didTapOutsideArea area: UIView?)
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapCancelButton cancelButton: UIButton)
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapConfirmButton confirmButton: UIButton)
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapNonButtonArea area: UIView?)
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapOutsideArea area: UIView?)
 }
 
 public extension PureAlertControllerDelegate {
-    func alertView(_ alertView: PureAlertView, didClickCancelButton cancelButton: UIButton) { }
-    func alertView(_ alertView: PureAlertView, didClickConfirmButton confirmButton: UIButton) { }
-    func alertView(_ alertView: PureAlertView, didTapNonButtonArea area: UIView?) { }
-    func alertView(_ alertView: PureAlertView, didTapOutsideArea area: UIView?) { }
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapCancelButton cancelButton: UIButton) { }
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapConfirmButton confirmButton: UIButton) { }
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapNonButtonArea area: UIView?) { }
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapOutsideArea area: UIView?) { }
 }
 
 open class PureAlertController: UIViewController {
@@ -67,7 +67,7 @@ open class PureAlertController: UIViewController {
     }
     
     @objc private func outsideAreaTapped(sender recognizer: UIGestureRecognizer) {
-        delegate?.alertView(alertView, didTapOutsideArea: recognizer.view)
+        delegate?.alertView(alertView, in: self, didTapOutsideArea: recognizer.view)
     }
     
     private func loadAlertView() {
@@ -82,14 +82,15 @@ open class PureAlertController: UIViewController {
 
 extension PureAlertController: PureAlertViewDelegate {
     func alertView(_ alertView: PureAlertView, didTapNonButtonArea area: UIView?) {
-        delegate?.alertView(alertView, didTapNonButtonArea: area)
+        delegate?.alertView(alertView, in: self, didTapNonButtonArea: area)
     }
     
     func alertView(_ alertView: PureAlertView, didTapCancelButton cancelButton: UIButton) {
-        delegate?.alertView(alertView, didClickCancelButton: cancelButton)
+        dismiss(animated: false, completion: nil)
+        delegate?.alertView(alertView, in: self, didTapCancelButton: cancelButton)
     }
     
     func alertView(_ alertView: PureAlertView, didTapConfirmButton confirmButton: UIButton) {
-        delegate?.alertView(alertView, didClickConfirmButton: confirmButton)
+        delegate?.alertView(alertView, in: self, didTapConfirmButton: confirmButton)
     }
 }
