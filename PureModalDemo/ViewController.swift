@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let alertController = PureAlertController()
+        alertController.tintColor = UIColor.darkText
         alertController.modal(for: self)
     }
 

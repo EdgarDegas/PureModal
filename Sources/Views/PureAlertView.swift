@@ -55,8 +55,6 @@ open class PureAlertView: UIView {
             .isActive = true
         widthAnchor.constraint(equalTo: superView.widthAnchor, constant: -120)
             .isActive = true
-//        heightAnchor.constraint(equalToConstant: 200)
-//            .isActive = true
     }
     
     
