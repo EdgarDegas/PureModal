@@ -8,12 +8,55 @@
 
 /* Begin PBXBuildFile section */
 		B358410F1F4D10EA007C40F4 /* PureModal.h in Headers */ = {isa = PBXBuildFile; fileRef = B358410D1F4D10EA007C40F4 /* PureModal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B35841171F4D11A4007C40F4 /* PureAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35841161F4D11A4007C40F4 /* PureAlertView.swift */; };
+		B358411F1F4D1200007C40F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358411E1F4D1200007C40F4 /* AppDelegate.swift */; };
+		B35841211F4D1200007C40F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35841201F4D1200007C40F4 /* ViewController.swift */; };
+		B35841241F4D1200007C40F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35841221F4D1200007C40F4 /* Main.storyboard */; };
+		B35841261F4D1200007C40F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B35841251F4D1200007C40F4 /* Assets.xcassets */; };
+		B35841291F4D1200007C40F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35841271F4D1200007C40F4 /* LaunchScreen.storyboard */; };
+		B35841301F4D1463007C40F4 /* PureAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358412F1F4D1463007C40F4 /* PureAlertController.swift */; };
+		B35841311F4D14D7007C40F4 /* PureModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B358410A1F4D10EA007C40F4 /* PureModal.framework */; };
+		B35841321F4D1571007C40F4 /* PureModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B358410A1F4D10EA007C40F4 /* PureModal.framework */; };
+		B35841331F4D1571007C40F4 /* PureModal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B358410A1F4D10EA007C40F4 /* PureModal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B35841341F4D1571007C40F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B35841011F4D10E9007C40F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B35841091F4D10EA007C40F4;
+			remoteInfo = PureModal;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B35841361F4D1571007C40F4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B35841331F4D1571007C40F4 /* PureModal.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B358410A1F4D10EA007C40F4 /* PureModal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PureModal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B358410D1F4D10EA007C40F4 /* PureModal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PureModal.h; sourceTree = "<group>"; };
 		B358410E1F4D10EA007C40F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B35841161F4D11A4007C40F4 /* PureAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureAlertView.swift; sourceTree = "<group>"; };
+		B358411C1F4D1200007C40F4 /* PureModalDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PureModalDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B358411E1F4D1200007C40F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B35841201F4D1200007C40F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B35841231F4D1200007C40F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B35841251F4D1200007C40F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B35841281F4D1200007C40F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B358412A1F4D1200007C40F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B358412F1F4D1463007C40F4 /* PureAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureAlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,13 +67,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B35841191F4D1200007C40F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B35841321F4D1571007C40F4 /* PureModal.framework in Frameworks */,
+				B35841311F4D14D7007C40F4 /* PureModal.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B30997371F4D1EB2007570B1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B35841001F4D10E9007C40F4 = {
 			isa = PBXGroup;
 			children = (
-				B358410C1F4D10EA007C40F4 /* PureModal */,
+				B358410C1F4D10EA007C40F4 /* Sources */,
+				B358411D1F4D1200007C40F4 /* PureModalDemo */,
 				B358410B1F4D10EA007C40F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -39,17 +99,50 @@
 			isa = PBXGroup;
 			children = (
 				B358410A1F4D10EA007C40F4 /* PureModal.framework */,
+				B358411C1F4D1200007C40F4 /* PureModalDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B358410C1F4D10EA007C40F4 /* PureModal */ = {
+		B358410C1F4D10EA007C40F4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				B30997371F4D1EB2007570B1 /* Extensions */,
+				B358412E1F4D143B007C40F4 /* Controllers */,
+				B35841151F4D1160007C40F4 /* Views */,
 				B358410D1F4D10EA007C40F4 /* PureModal.h */,
 				B358410E1F4D10EA007C40F4 /* Info.plist */,
 			);
-			path = PureModal;
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		B35841151F4D1160007C40F4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B35841161F4D11A4007C40F4 /* PureAlertView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B358411D1F4D1200007C40F4 /* PureModalDemo */ = {
+			isa = PBXGroup;
+			children = (
+				B358411E1F4D1200007C40F4 /* AppDelegate.swift */,
+				B35841201F4D1200007C40F4 /* ViewController.swift */,
+				B35841221F4D1200007C40F4 /* Main.storyboard */,
+				B35841251F4D1200007C40F4 /* Assets.xcassets */,
+				B35841271F4D1200007C40F4 /* LaunchScreen.storyboard */,
+				B358412A1F4D1200007C40F4 /* Info.plist */,
+			);
+			path = PureModalDemo;
+			sourceTree = "<group>";
+		};
+		B358412E1F4D143B007C40F4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B358412F1F4D1463007C40F4 /* PureAlertController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -84,16 +177,41 @@
 			productReference = B358410A1F4D10EA007C40F4 /* PureModal.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		B358411B1F4D1200007C40F4 /* PureModalDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B358412B1F4D1200007C40F4 /* Build configuration list for PBXNativeTarget "PureModalDemo" */;
+			buildPhases = (
+				B35841181F4D1200007C40F4 /* Sources */,
+				B35841191F4D1200007C40F4 /* Frameworks */,
+				B358411A1F4D1200007C40F4 /* Resources */,
+				B35841361F4D1571007C40F4 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B35841351F4D1571007C40F4 /* PBXTargetDependency */,
+			);
+			name = PureModalDemo;
+			productName = PureModalDemo;
+			productReference = B358411C1F4D1200007C40F4 /* PureModalDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		B35841011F4D10E9007C40F4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = iMoeNya;
 				TargetAttributes = {
 					B35841091F4D10EA007C40F4 = {
+						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+					};
+					B358411B1F4D1200007C40F4 = {
 						CreatedOnToolsVersion = 9.0;
 					};
 				};
@@ -104,6 +222,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = B35841001F4D10E9007C40F4;
 			productRefGroup = B358410B1F4D10EA007C40F4 /* Products */;
@@ -111,6 +230,7 @@
 			projectRoot = "";
 			targets = (
 				B35841091F4D10EA007C40F4 /* PureModal */,
+				B358411B1F4D1200007C40F4 /* PureModalDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -123,6 +243,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B358411A1F4D1200007C40F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B35841291F4D1200007C40F4 /* LaunchScreen.storyboard in Resources */,
+				B35841261F4D1200007C40F4 /* Assets.xcassets in Resources */,
+				B35841241F4D1200007C40F4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -130,10 +260,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B35841301F4D1463007C40F4 /* PureAlertController.swift in Sources */,
+				B35841171F4D11A4007C40F4 /* PureAlertView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B35841181F4D1200007C40F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B35841211F4D1200007C40F4 /* ViewController.swift in Sources */,
+				B358411F1F4D1200007C40F4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B35841351F4D1571007C40F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B35841091F4D10EA007C40F4 /* PureModal */;
+			targetProxy = B35841341F4D1571007C40F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B35841221F4D1200007C40F4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B35841231F4D1200007C40F4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B35841271F4D1200007C40F4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B35841281F4D1200007C40F4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B35841101F4D10EA007C40F4 /* Debug */ = {
@@ -252,18 +420,24 @@
 		B35841131F4D10EA007C40F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = GVYB79VSRG;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = PureModal/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iMoeNya.PureModal;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -272,18 +446,55 @@
 		B35841141F4D10EA007C40F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = GVYB79VSRG;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = PureModal/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iMoeNya.PureModal;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B358412C1F4D1200007C40F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GVYB79VSRG;
+				INFOPLIST_FILE = PureModalDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iMoeNya.PureModalDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B358412D1F4D1200007C40F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GVYB79VSRG;
+				INFOPLIST_FILE = PureModalDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.iMoeNya.PureModalDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -306,6 +517,15 @@
 			buildConfigurations = (
 				B35841131F4D10EA007C40F4 /* Debug */,
 				B35841141F4D10EA007C40F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B358412B1F4D1200007C40F4 /* Build configuration list for PBXNativeTarget "PureModalDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B358412C1F4D1200007C40F4 /* Debug */,
+				B358412D1F4D1200007C40F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
