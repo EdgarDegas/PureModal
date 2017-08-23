@@ -34,14 +34,25 @@ open class PureAlertView: UIView {
     open var confirmButton: UIButton?
     open var dismissTimeout: TimeInterval?
     
-    convenience public init(withStyle style: PureAlertViewStyle) {
+    convenience public init(withTitle title: String?, message: String?, style: PureAlertViewStyle) {
         self.init()
+        setupAppearance()
+        
+        if let title = title {
+            titleLabel = UILabel()
+            titleLabel?.text = title
+        }
+        if let message = message {
+            messageLabel = UILabel()
+            messageLabel?.text = message
+        }
         switch style {
         case .default(let buttonTitle):
             if let title = buttonTitle {
                 cancelButton = UIButton(type: .system)
                 cancelButton?.setTitle(title, for: .normal)
             }
+            loadDefaultAlertView()
         case .autoDismiss(let timeoutOfDismiss):
             dismissTimeout = timeoutOfDismiss
         case .dialogue(let cancelTitle, let confirmTitle):
@@ -53,6 +64,61 @@ open class PureAlertView: UIView {
                 confirmButton = UIButton(type: .system)
                 confirmButton?.setTitle(confirm, for: .normal)
             }
+        }
+    }
+    
+    private func setupAppearance() {
+        translatesAutoresizingMaskIntoConstraints = false
+        layer.cornerRadius = 12
+        backgroundColor = UIColor.white
+    }
+    
+    private func loadDefaultAlertView() {
+        func loadCancelButton(under topToAnchor: NSLayoutYAxisAnchor) {
+            if cancelButton == nil {
+                cancelButton = UIButton(type: .system)
+                cancelButton?.setTitle("Cancel", for: .normal)
+            }
+            addSubview(cancelButton!)
+            cancelButton?.topAnchor.constraint(equalTo: topToAnchor, constant: 20)
+                .isActive = true
+            cancelButton?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+                .isActive = true
+            cancelButton?.centerXAnchor.constraint(equalTo: centerXAnchor)
+                .isActive = true
+        }
+        
+        if let titleAndMessageStack = loadTitleAndMessage() {
+            addSubview(titleAndMessageStack)
+            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor)
+                .isActive = true
+            titleAndMessageStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
+                .isActive = true
+            loadCancelButton(under: titleAndMessageStack.bottomAnchor)
+        } else {
+            loadCancelButton(under: topAnchor)
+        }
+        
+    }
+    
+    private func loadTitleAndMessage() -> UIStackView? {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 8
+        if let titleLabel = titleLabel {
+            titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+            stackView.addArrangedSubview(titleLabel)
+        }
+        if let messageLabel = messageLabel {
+            messageLabel.font = UIFont.preferredFont(forTextStyle: .body)
+            stackView.addArrangedSubview(messageLabel)
+        }
+        if stackView.arrangedSubviews.isEmpty {
+            return nil
+        } else {
+            return stackView
         }
     }
 }
