@@ -8,6 +8,22 @@
 
 import UIKit
 
+/// Style of Pure Alert View.
+///
+/// - `default`: The default style with title, message and a cancel button (default title: OK)
+/// - autoDismiss: A box with title, message. Disappear after some time (default length: 2 seconds)
+/// - dialogue: A dialogue box with title, message and two buttons.
+enum PureAlertViewStyle {
+    /// Title, message and a cancel button (default title: OK)
+    case `default`
+    /// Title, message. Disappear after some time (default length: 2 seconds)
+    case autoDismiss
+    /// Title, message, and two button:
+    /// - a cancel button (default title: No)
+    /// - a comfirm button (defualt title: Yes)
+    case dialogue
+}
+
 class PureAlertView: UIView {
 
     /*
