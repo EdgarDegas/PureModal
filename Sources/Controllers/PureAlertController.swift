@@ -61,7 +61,7 @@ open class PureAlertController: UIViewController {
     }
     
     private func loadAlertView() {
-        alertView = PureAlertView(withTitle: "Title", message: "messagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessage", style: .default("OK"))
+        alertView = PureAlertView(withTitle: "Title", message: "messagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessage", style: .default(buttonTitle: "OK"))
         alertView.delegate = self
         alertView.addTo(view: window)
     }

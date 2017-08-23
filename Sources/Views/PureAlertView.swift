@@ -16,15 +16,15 @@ import UIKit
 public enum PureAlertViewStyle {
     
     /// Title, message and a cancel button (default title: OK)
-    case `default`(String?)
+    case `default`(buttonTitle: String?)
     
     /// Title, message. Disappear after some time (default length: 2 seconds)
-    case autoDismiss(TimeInterval?)
+    case autoDismiss(after: TimeInterval?)
     
     /// Title, message, and two button:
     /// - a cancel button (default title: No)
     /// - a confirm button (defualt title: Yes)
-    case dialogue(String?, String?)
+    case dialogue(cancelButtonTitle: String?, confirmButtonTitle: String?)
 }
 
 public protocol PureAlertViewDelegate: class {
@@ -124,7 +124,7 @@ open class PureAlertView: UIView {
             addSubview(titleAndMessageStack)
             titleAndMessageStack.topAnchor.constraint(equalTo: topAnchor, constant: 20)
                 .isActive = true
-            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -20)
+            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -40)
                 .isActive = true
             titleAndMessageStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
                 .isActive = true
@@ -150,6 +150,7 @@ open class PureAlertView: UIView {
         }
         if let messageLabel = messageLabel {
             messageLabel.font = UIFont.preferredFont(forTextStyle: .body)
+            messageLabel.textColor = #colorLiteral(red: 0.4168450832, green: 0.4168450832, blue: 0.4168450832, alpha: 1)
             messageLabel.translatesAutoresizingMaskIntoConstraints = false
             messageLabel.lineBreakMode = .byWordWrapping
             messageLabel.numberOfLines = 0
