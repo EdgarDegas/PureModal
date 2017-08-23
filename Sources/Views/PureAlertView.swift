@@ -28,11 +28,26 @@ public enum PureAlertViewStyle {
 }
 
 open class PureAlertView: UIView {
+    
+    // MARK: - Variables
+
     open var titleLabel: UILabel?
     open var messageLabel: UILabel?
     open var cancelButton: UIButton?
     open var confirmButton: UIButton?
     open var dismissTimeout: TimeInterval?
+    
+    
+    // MARK: - Interface
+    
+    func addTo(view superView: UIView) {
+        superView.addSubview(self)
+        centerXAnchor.constraint(equalTo: superView.centerXAnchor)
+            .isActive = true
+        centerYAnchor.constraint(equalTo: superView.centerYAnchor)
+            .isActive = true
+    }
+    
     
     convenience public init(withTitle title: String?, message: String?, style: PureAlertViewStyle) {
         self.init()
