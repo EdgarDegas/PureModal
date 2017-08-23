@@ -37,7 +37,6 @@ open class PureAlertController: UIViewController {
         }
     }
     
-    
     // MARK: - Initialization
     
     private func loadWindow() {
