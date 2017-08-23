@@ -27,6 +27,16 @@ public enum PureAlertViewStyle {
     case dialogue(String?, String?)
 }
 
+public protocol PureAlertViewDelegate: class {
+    func alertView(_ alertView: PureAlertView, didClickCancelButton cancelButton: UIButton)
+    func alertView(_ alertView: PureAlertView, didClickConfirmButton confirmButton: UIButton)
+}
+
+public extension PureAlertViewDelegate {
+    func alertView(_ alertView: PureAlertView, didClickCancelButton cancelButton: UIButton) { }
+    func alertView(_ alertView: PureAlertView, didClickConfirmButton confirmButton: UIButton) { }
+}
+
 open class PureAlertView: UIView {
     
     // MARK: - Variables
@@ -37,6 +47,7 @@ open class PureAlertView: UIView {
     open var confirmButton: UIButton?
     open var dismissTimeout: TimeInterval?
     
+    weak var delegate: PureAlertViewDelegate?
     
     // MARK: - Interface
     
@@ -111,7 +122,9 @@ open class PureAlertView: UIView {
         if let titleAndMessageStack = loadTitleAndMessage() {
             titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
             addSubview(titleAndMessageStack)
-            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor)
+            titleAndMessageStack.topAnchor.constraint(equalTo: topAnchor, constant: 20)
+                .isActive = true
+            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -20)
                 .isActive = true
             titleAndMessageStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
                 .isActive = true
@@ -131,11 +144,15 @@ open class PureAlertView: UIView {
         if let titleLabel = titleLabel {
             titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            titleLabel.lineBreakMode = .byWordWrapping
+            titleLabel.numberOfLines = 0
             stackView.addArrangedSubview(titleLabel)
         }
         if let messageLabel = messageLabel {
             messageLabel.font = UIFont.preferredFont(forTextStyle: .body)
             messageLabel.translatesAutoresizingMaskIntoConstraints = false
+            messageLabel.lineBreakMode = .byWordWrapping
+            messageLabel.numberOfLines = 0
             stackView.addArrangedSubview(messageLabel)
         }
         if stackView.arrangedSubviews.isEmpty {

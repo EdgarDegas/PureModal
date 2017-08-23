@@ -8,6 +8,16 @@
 
 import UIKit
 
+public protocol PureAlertControllerDelegate: class {
+    func alertView(_ alertView: PureAlertView, didClickCancelButton cancelButton: UIButton)
+    func alertView(_ alertView: PureAlertView, didClickConfirmButton confirmButton: UIButton)
+}
+
+public extension PureAlertControllerDelegate {
+    func alertView(_ alertView: PureAlertView, didClickCancelButton cancelButton: UIButton) { }
+    func alertView(_ alertView: PureAlertView, didClickConfirmButton confirmButton: UIButton) { }
+}
+
 open class PureAlertController: UIViewController {
     
     // MARK: - Variables and Interface
@@ -16,6 +26,7 @@ open class PureAlertController: UIViewController {
 //    var alertView: UIView!
     var alertView: PureAlertView!
     weak var viewController: UIViewController?
+    weak var delegate: PureAlertControllerDelegate?
     
     open func modal(for viewController: UIViewController) {
         self.viewController = viewController
@@ -42,7 +53,6 @@ open class PureAlertController: UIViewController {
     
     private func loadWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
-//        window.backgroundColor = UIColor(white: 0, alpha: 0.7)
         window.windowLevel = UIWindowLevelAlert
         window.makeKeyAndVisible()
         window.rootViewController = UIViewController()
@@ -51,18 +61,12 @@ open class PureAlertController: UIViewController {
     }
     
     private func loadAlertView() {
-        alertView = PureAlertView(withTitle: "Title", message: "message", style: .default("OK"))
+        alertView = PureAlertView(withTitle: "Title", message: "messagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessage", style: .default("OK"))
+        alertView.delegate = self
         alertView.addTo(view: window)
     }
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+extension PureAlertController: PureAlertViewDelegate {
+    
 }
