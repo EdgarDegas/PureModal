@@ -46,6 +46,10 @@ open class PureAlertView: UIView {
             .isActive = true
         centerYAnchor.constraint(equalTo: superView.centerYAnchor)
             .isActive = true
+        widthAnchor.constraint(equalTo: superView.widthAnchor, constant: -120)
+            .isActive = true
+//        heightAnchor.constraint(equalToConstant: 200)
+//            .isActive = true
     }
     
     
@@ -94,16 +98,18 @@ open class PureAlertView: UIView {
                 cancelButton = UIButton(type: .system)
                 cancelButton?.setTitle("Cancel", for: .normal)
             }
+            cancelButton?.translatesAutoresizingMaskIntoConstraints = false
             addSubview(cancelButton!)
             cancelButton?.topAnchor.constraint(equalTo: topToAnchor, constant: 20)
                 .isActive = true
-            cancelButton?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+            cancelButton?.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)
                 .isActive = true
             cancelButton?.centerXAnchor.constraint(equalTo: centerXAnchor)
                 .isActive = true
         }
         
         if let titleAndMessageStack = loadTitleAndMessage() {
+            titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
             addSubview(titleAndMessageStack)
             titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor)
                 .isActive = true
@@ -124,10 +130,12 @@ open class PureAlertView: UIView {
         stackView.spacing = 8
         if let titleLabel = titleLabel {
             titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
             stackView.addArrangedSubview(titleLabel)
         }
         if let messageLabel = messageLabel {
             messageLabel.font = UIFont.preferredFont(forTextStyle: .body)
+            messageLabel.translatesAutoresizingMaskIntoConstraints = false
             stackView.addArrangedSubview(messageLabel)
         }
         if stackView.arrangedSubviews.isEmpty {

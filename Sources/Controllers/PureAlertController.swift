@@ -51,20 +51,6 @@ open class PureAlertController: UIViewController {
     }
     
     private func loadAlertView() {
-//        alertView = UIView()
-//        window.addSubview(alertView)
-//        alertView.layer.cornerRadius = 12
-//        alertView.backgroundColor = UIColor.white
-//        alertView.translatesAutoresizingMaskIntoConstraints = false
-//        alertView.widthAnchor.constraint(equalTo: window.widthAnchor, constant: -120)
-//            .isActive = true
-//        alertView.heightAnchor.constraint(equalTo: window.heightAnchor, constant: -400)
-//            .isActive = true
-//        alertView.centerXAnchor.constraint(equalTo: window.centerXAnchor)
-//            .isActive = true
-//        alertView.centerYAnchor.constraint(equalTo: window.centerYAnchor)
-//            .isActive = true
-        
         alertView = PureAlertView(withTitle: "Title", message: "message", style: .default("OK"))
         alertView.addTo(view: window)
     }
