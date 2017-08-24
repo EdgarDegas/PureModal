@@ -18,18 +18,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kx-aK-Vpz">
-                                <rect key="frame" x="142" y="318" width="90" height="30"/>
-                                <state key="normal" title="Present Alert"/>
-                                <connections>
-                                    <action selector="presentAlertButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fGe-D8-78Q"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Wak-ca-l8v">
+                                <rect key="frame" x="98" y="284" width="179" height="98"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kx-aK-Vpz">
+                                        <rect key="frame" x="0.0" y="0.0" width="179" height="30"/>
+                                        <state key="normal" title="Present Default Alert"/>
+                                        <connections>
+                                            <action selector="presentDefaultAlertButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GBb-Fe-wpF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AD-Sk-HjM">
+                                        <rect key="frame" x="0.0" y="34" width="179" height="30"/>
+                                        <state key="normal" title="Present AutoDismiss Alert"/>
+                                        <connections>
+                                            <action selector="presentAutoDismissAlertButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dbf-k0-q62"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9br-sE-6Q4">
+                                        <rect key="frame" x="0.0" y="68" width="179" height="30"/>
+                                        <state key="normal" title="Present Dialogue Alert"/>
+                                        <connections>
+                                            <action selector="presentDialogueAlertButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ke8-3k-MML"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="9kx-aK-Vpz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="MTG-iy-7KG"/>
-                            <constraint firstItem="9kx-aK-Vpz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YPh-0N-IUt"/>
+                            <constraint firstItem="Wak-ca-l8v" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jSz-hv-jje"/>
+                            <constraint firstItem="Wak-ca-l8v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="k1S-4v-kcw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

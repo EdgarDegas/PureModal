@@ -31,6 +31,7 @@ protocol PureAlertViewDelegate: class {
     func alertView(_ alertView: PureAlertView, didTapCancelButton cancelButton: UIButton)
     func alertView(_ alertView: PureAlertView, didTapConfirmButton confirmButton: UIButton)
     func alertView(_ alertView: PureAlertView, didTapNonButtonArea area: UIView?)
+    func alertView(_ alertView: PureAlertView, didReachDismissTimeout timeout: TimeInterval)
 }
 
 open class PureAlertView: UIView {
@@ -57,7 +58,6 @@ open class PureAlertView: UIView {
             .isActive = true
     }
     
-    
     convenience public init(withTitle title: String?, message: String?, style: PureAlertViewStyle) {
         self.init()
         setupAppearance()
@@ -79,6 +79,7 @@ open class PureAlertView: UIView {
             loadDefaultAlertView()
         case .autoDismiss(let timeoutOfDismiss):
             dismissTimeout = timeoutOfDismiss
+            loadAutoDismissAlertView()
         case .dialogue(let cancelTitle, let confirmTitle):
             if let cancel = cancelTitle {
                 cancelButton = UIButton(type: .system)
@@ -103,6 +104,9 @@ open class PureAlertView: UIView {
         print("nonButtonAreaTapped")
     }
     
+    
+    // MARK: - load view methods
+    
     private func loadDefaultAlertView() {
         func loadCancelButton(under topToAnchor: NSLayoutYAxisAnchor) {
             if cancelButton == nil {
@@ -120,7 +124,7 @@ open class PureAlertView: UIView {
                 .isActive = true
         }
         
-        if let titleAndMessageStack = loadTitleAndMessage() {
+        if let titleAndMessageStack = titleAndMessageStack {
             titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
             addSubview(titleAndMessageStack)
             titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 20)
@@ -133,10 +137,31 @@ open class PureAlertView: UIView {
         } else {
             loadCancelButton(under: topAnchor)
         }
-        
     }
     
-    private func loadTitleAndMessage() -> UIStackView? {
+    private func loadAutoDismissAlertView() {
+        if let interval = dismissTimeout {
+            let notifyDelegateWorkItem = DispatchWorkItem(block: {
+                self.delegate?.alertView(self, didReachDismissTimeout: interval)
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + interval, execute: notifyDelegateWorkItem)
+        }
+        
+        if let titleAndMessageStack = titleAndMessageStack {
+            titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(titleAndMessageStack)
+            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 20)
+                .isActive = true
+            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -40)
+                .isActive = true
+            titleAndMessageStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
+                .isActive = true
+            titleAndMessageStack.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: -20)
+                .isActive = true
+        }
+    }
+    
+    private var titleAndMessageStack: UIStackView? {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center

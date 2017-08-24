@@ -13,6 +13,7 @@ public protocol PureAlertControllerDelegate: class {
     func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapConfirmButton confirmButton: UIButton)
     func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapNonButtonArea area: UIView?)
     func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapOutsideArea area: UIView?)
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didReachDismissTimeout timeout: TimeInterval)
 }
 
 public extension PureAlertControllerDelegate {
@@ -20,6 +21,7 @@ public extension PureAlertControllerDelegate {
     func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapConfirmButton confirmButton: UIButton) { }
     func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapNonButtonArea area: UIView?) { }
     func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapOutsideArea area: UIView?) { }
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didReachDismissTimeout timeout: TimeInterval) { }
 }
 
 open class PureAlertController: UIViewController {
@@ -164,5 +166,9 @@ extension PureAlertController: PureAlertViewDelegate {
     
     func alertView(_ alertView: PureAlertView, didTapConfirmButton confirmButton: UIButton) {
         delegate?.alertView(alertView, in: self, didTapConfirmButton: confirmButton)
+    }
+    
+    func alertView(_ alertView: PureAlertView, didReachDismissTimeout timeout: TimeInterval) {
+        delegate?.alertView(alertView, in: self, didReachDismissTimeout: timeout)
     }
 }
