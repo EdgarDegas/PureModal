@@ -114,7 +114,7 @@ open class PureAlertView: UIView {
             addSubview(cancelButton!)
             cancelButton?.topAnchor.constraint(equalTo: topToAnchor, constant: 20)
                 .isActive = true
-            cancelButton?.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)
+            cancelButton?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
                 .isActive = true
             cancelButton?.centerXAnchor.constraint(equalTo: centerXAnchor)
                 .isActive = true
@@ -123,7 +123,7 @@ open class PureAlertView: UIView {
         if let titleAndMessageStack = loadTitleAndMessage() {
             titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
             addSubview(titleAndMessageStack)
-            titleAndMessageStack.topAnchor.constraint(equalTo: topAnchor, constant: 20)
+            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 20)
                 .isActive = true
             titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -40)
                 .isActive = true
@@ -141,7 +141,7 @@ open class PureAlertView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
-        stackView.spacing = 8
+        stackView.spacing = 20
         if let titleLabel = titleLabel {
             titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
