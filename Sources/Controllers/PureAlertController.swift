@@ -69,19 +69,17 @@ open class PureAlertController: UIViewController {
         let windowAnimator = UIViewPropertyAnimator(duration: 0.1, curve: .easeOut) {
             self.window.rootViewController!.view.backgroundColor = UIColor(white: 0, alpha: 0)
         }
-        let timeParameters = UISpringTimingParameters(mass: 0.68, stiffness: 120, damping: 1000, initialVelocity: CGVector(dx: 8, dy: 8))
+        let timeParameters = UISpringTimingParameters(mass: 0.1, stiffness: 120, damping: 1000, initialVelocity: CGVector(dx: 8, dy: 8))
         let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
         animator.addAnimations {
             self.alertView.transform = CGAffineTransform(scaleX: 0.68, y: 0.68)
             self.alertView.backgroundColor = UIColor(white: 1, alpha: 0)
         }
-        
-        animator.addCompletion { _ in
+        windowAnimator.addCompletion { _ in
             self.window = nil
             super.dismiss(animated: flag, completion: completion)
         }
         windowAnimator.startAnimation()
-//        animator.isReversed = true
         animator.startAnimation()
     }
     
