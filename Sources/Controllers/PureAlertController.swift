@@ -25,8 +25,15 @@ public extension PureAlertControllerDelegate {
 open class PureAlertController: UIViewController {
     
     // MARK: - Variables and Interface
+    open override var title: String? {
+        get { return alertTitle }
+        set { alertTitle = newValue }
+    }
     
     public var tintColor: UIColor?
+    public var alertTitle: String?
+    public var alertMessage: String?
+    public var alertStyle: PureAlertViewStyle?
     var shouldPresentedAnimated: Bool!
     var window: UIWindow!
     var alertView: PureAlertView!
@@ -34,12 +41,20 @@ open class PureAlertController: UIViewController {
     
     convenience public init(withTitle title: String?, message: String?, withStyle style: PureAlertViewStyle) {
         self.init()
+        alertTitle = title
+        alertMessage = message
+        alertStyle = style
     }
     
     open func modal(animated: Bool, for viewController: UIViewController) {
         modalPresentationStyle = .overCurrentContext
         shouldPresentedAnimated = animated
+        self.loadWindow()
+        self.loadAlertView()
         viewController.present(self, animated: true, completion: nil)
+        if shouldPresentedAnimated {
+            animatedFadeIn()
+        }
     }
     
     
@@ -47,13 +62,8 @@ open class PureAlertController: UIViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadWindow()
-        self.loadAlertView()
-        if shouldPresentedAnimated {
-            animatedFadeIn()
-        }
     }
-    
+
     open override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         if flag {
             animatedFadeOut(completion: completion)
@@ -91,7 +101,7 @@ open class PureAlertController: UIViewController {
     }
     
     private func loadAlertView() {
-        alertView = PureAlertView(withTitle: "标题", message: "标准样式模态框，带一个标题，一个消息，一个按钮\n示例文本示例文本示例文本示例文本示例文本示例文本示例文本示例文本示例文本示例文本示例文本示例文本示例文本示例文本示例文本示例文本示例文本", style: .default(buttonTitle: "完成"))
+        alertView = PureAlertView(withTitle: alertTitle, message: alertMessage, style: alertStyle ?? .default(buttonTitle: nil))
         if let tintColor = tintColor {
             alertView.tintColor = tintColor
         }

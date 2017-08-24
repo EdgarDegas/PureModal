@@ -11,10 +11,12 @@ import PureModal
 
 class ViewController: UIViewController {
     
+    let alertController = PureAlertController(withTitle: "Title", message: "message", withStyle: .default(buttonTitle: nil))
     
     @IBAction func presentAlertButtonTapped(_ sender: UIButton) {
-        let alertController = PureAlertController()
         alertController.delegate = self
+        alertController.alertTitle = "Changed Title"
+        alertController.title = "Changed Title with Title"
         alertController.modal(animated: true, for: self)
     }
     
