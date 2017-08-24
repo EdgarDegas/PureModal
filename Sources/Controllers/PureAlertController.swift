@@ -45,8 +45,22 @@ open class PureAlertController: UIViewController {
     }
     
     open override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-        window = nil
-        super.dismiss(animated: flag, completion: completion)
+        for subview in alertView.subviews {
+            subview.isHidden = true
+        }
+        let animatorOfWindow = UIViewPropertyAnimator(duration: 0.1, curve: .easeOut) {
+            self.window.rootViewController!.view.backgroundColor = UIColor(white: 0, alpha: 0)
+        }
+        let animatorOfAlertView = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut) {
+            self.alertView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            self.alertView.backgroundColor = UIColor(white: 1, alpha: 0)
+        }
+        animatorOfAlertView.addCompletion { _ in
+            self.window = nil
+            super.dismiss(animated: flag, completion: completion)
+        }
+        animatorOfWindow.startAnimation()
+        animatorOfAlertView.startAnimation()
     }
     
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
