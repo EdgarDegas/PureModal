@@ -15,20 +15,15 @@ class ViewController: UIViewController {
     @IBAction func presentAlertButtonTapped(_ sender: UIButton) {
         let alertController = PureAlertController()
         alertController.delegate = self
-        alertController.modal(for: self)
-//        present(alertC, animated: true, completion: nil)
+        alertController.modal(animated: true, for: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        alertC.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: { (action) in
-//            self.alertC.dismiss(animated: true, completion: nil)
-//        }))
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
@@ -36,6 +31,6 @@ class ViewController: UIViewController {
 
 extension ViewController: PureAlertControllerDelegate {
     func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapCancelButton cancelButton: UIButton) {
-        controller.dismiss(animated: false, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
 }
