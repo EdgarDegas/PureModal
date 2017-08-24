@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         let autoDismissAlertController = PureAlertController()
         autoDismissAlertController.alertTitle = "Title"
         autoDismissAlertController.alertMessage = "message"
-        autoDismissAlertController.alertStyle = .autoDismiss(after: 2.0)
+        autoDismissAlertController.alertStyle = .autoDismiss(after: nil)
         autoDismissAlertController.delegate = self
         autoDismissAlertController.modal(animated: true, for: self)
     }

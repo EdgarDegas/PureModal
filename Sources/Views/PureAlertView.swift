@@ -140,12 +140,10 @@ open class PureAlertView: UIView {
     }
     
     private func loadAutoDismissAlertView() {
-        if let interval = dismissTimeout {
-            let notifyDelegateWorkItem = DispatchWorkItem(block: {
-                self.delegate?.alertView(self, didReachDismissTimeout: interval)
-            })
-            DispatchQueue.main.asyncAfter(deadline: .now() + interval, execute: notifyDelegateWorkItem)
-        }
+        let notifyDelegateWorkItem = DispatchWorkItem(block: {
+            self.delegate?.alertView(self, didReachDismissTimeout: self.dismissTimeout ?? 2)
+        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + (dismissTimeout ?? 2), execute: notifyDelegateWorkItem)
         
         if let titleAndMessageStack = titleAndMessageStack {
             titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
