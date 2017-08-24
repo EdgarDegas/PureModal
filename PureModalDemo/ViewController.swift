@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBAction func presentDefaultAlertButtonTapped(_ sender: UIButton) {
         let alertController = PureAlertController()
         alertController.title = "Changed Title with Title"
-        alertController.alertMessage = "message message message messagemessagemessagemessage"
+        alertController.alertMessage = "message message message"
         alertController.delegate = self
         alertController.modal(animated: true, for: self)
     }
