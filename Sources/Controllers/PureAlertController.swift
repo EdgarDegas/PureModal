@@ -31,36 +31,58 @@ open class PureAlertController: UIViewController {
     var alertView: PureAlertView!
     public weak var delegate: PureAlertControllerDelegate?
     
+    convenience public init(withTitle title: String?, message: String?, withStyle style: PureAlertViewStyle) {
+        self.init()
+        
+    }
+    
     open func modal(for viewController: UIViewController) {
         modalPresentationStyle = .overCurrentContext
         viewController.present(self, animated: true, completion: nil)
-        loadWindow()
-        loadAlertView()
+
     }
+    
     
     // MARK: - Life cycle
     
     open override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadWindow()
+        self.loadAlertView()
+        alertView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        let windowAnimator = UIViewPropertyAnimator(duration: 0.15, curve: .easeOut) {
+            self.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.6)
+        }
+        let timeParameters = UISpringTimingParameters(mass: 0.68, stiffness: 120, damping: 16, initialVelocity: CGVector(dx: 14, dy: 14))
+        let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
+        animator.addAnimations {
+            self.alertView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+        windowAnimator.startAnimation()
+        animator.startAnimation()
     }
     
     open override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         for subview in alertView.subviews {
             subview.isHidden = true
         }
-        let animatorOfWindow = UIViewPropertyAnimator(duration: 0.1, curve: .easeOut) {
+        let windowAnimator = UIViewPropertyAnimator(duration: 0.1, curve: .easeOut) {
             self.window.rootViewController!.view.backgroundColor = UIColor(white: 0, alpha: 0)
         }
-        let animatorOfAlertView = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut) {
-            self.alertView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        let timeParameters = UISpringTimingParameters(mass: 0.68, stiffness: 120, damping: 1000, initialVelocity: CGVector(dx: 8, dy: 8))
+        let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
+        animator.addAnimations {
+            self.alertView.transform = CGAffineTransform(scaleX: 0.68, y: 0.68)
             self.alertView.backgroundColor = UIColor(white: 1, alpha: 0)
         }
-        animatorOfAlertView.addCompletion { _ in
+        
+        animator.addCompletion { _ in
             self.window = nil
             super.dismiss(animated: flag, completion: completion)
         }
-        animatorOfWindow.startAnimation()
-        animatorOfAlertView.startAnimation()
+        windowAnimator.startAnimation()
+//        animator.isReversed = true
+        animator.startAnimation()
     }
     
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -78,7 +100,7 @@ open class PureAlertController: UIViewController {
         window.makeKeyAndVisible()
         window.rootViewController = UIViewController()
         window.rootViewController?.view.frame = UIScreen.main.bounds
-        window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.6)
+        window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0)
         window.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(outsideAreaTapped(sender:))))
     }
     
