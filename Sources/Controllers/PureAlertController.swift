@@ -28,23 +28,25 @@ open class PureAlertController: UIViewController {
     
     public var tintColor: UIColor?
     var window: UIWindow!
-//    var alertView: UIView!
     var alertView: PureAlertView!
-    weak var viewController: UIViewController?
-    weak var delegate: PureAlertControllerDelegate?
+    public weak var delegate: PureAlertControllerDelegate?
     
     open func modal(for viewController: UIViewController) {
-        self.viewController = viewController
         modalPresentationStyle = .overCurrentContext
         viewController.present(self, animated: true, completion: nil)
+        loadWindow()
+        loadAlertView()
     }
     
     // MARK: - Life cycle
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        loadWindow()
-        loadAlertView()
+    }
+    
+    open override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        window = nil
+        super.dismiss(animated: flag, completion: completion)
     }
     
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -76,7 +78,7 @@ open class PureAlertController: UIViewController {
             alertView.tintColor = tintColor
         }
         alertView.delegate = self
-        alertView.addTo(view: window)
+        alertView.addTo(view: window.rootViewController!.view)
     }
 }
 
@@ -86,7 +88,6 @@ extension PureAlertController: PureAlertViewDelegate {
     }
     
     func alertView(_ alertView: PureAlertView, didTapCancelButton cancelButton: UIButton) {
-        dismiss(animated: false, completion: nil)
         delegate?.alertView(alertView, in: self, didTapCancelButton: cancelButton)
     }
     

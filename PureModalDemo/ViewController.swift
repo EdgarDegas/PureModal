@@ -10,12 +10,20 @@ import UIKit
 import PureModal
 
 class ViewController: UIViewController {
-
+    
+    
+    @IBAction func presentAlertButtonTapped(_ sender: UIButton) {
+        let alertController = PureAlertController()
+        alertController.delegate = self
+        alertController.modal(for: self)
+//        present(alertC, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let alertController = PureAlertController()
-        alertController.modal(for: self)
+//        alertC.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: { (action) in
+//            self.alertC.dismiss(animated: true, completion: nil)
+//        }))
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,7 +35,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: PureAlertControllerDelegate {
-    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didClickCancelButton cancelButton: UIButton) {
-        <#code#>
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapCancelButton cancelButton: UIButton) {
+        controller.dismiss(animated: false, completion: nil)
     }
 }
