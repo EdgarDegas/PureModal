@@ -145,16 +145,16 @@ open class PureAlertView: UIView {
         if let titleLabel = titleLabel {
             titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            titleLabel.lineBreakMode = .byWordWrapping
-            titleLabel.numberOfLines = 0
+            titleLabel.lineBreakMode = .byTruncatingTail
+            titleLabel.numberOfLines = 4
             stackView.addArrangedSubview(titleLabel)
         }
         if let messageLabel = messageLabel {
             messageLabel.font = UIFont.preferredFont(forTextStyle: .body)
             messageLabel.textColor = #colorLiteral(red: 0.4168450832, green: 0.4168450832, blue: 0.4168450832, alpha: 1)
             messageLabel.translatesAutoresizingMaskIntoConstraints = false
-            messageLabel.lineBreakMode = .byWordWrapping
-            messageLabel.numberOfLines = 0
+            messageLabel.lineBreakMode = .byTruncatingTail
+            messageLabel.numberOfLines = 16
             stackView.addArrangedSubview(messageLabel)
         }
         if stackView.arrangedSubviews.isEmpty {

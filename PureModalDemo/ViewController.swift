@@ -15,8 +15,8 @@ class ViewController: UIViewController {
     
     @IBAction func presentAlertButtonTapped(_ sender: UIButton) {
         alertController.delegate = self
-        alertController.alertTitle = "Changed Title"
         alertController.title = "Changed Title with Title"
+        alertController.alertMessage = "long message very long message long message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long message"
         alertController.modal(animated: true, for: self)
     }
     
@@ -27,8 +27,6 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
 }
 
 extension ViewController: PureAlertControllerDelegate {
