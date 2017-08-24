@@ -11,12 +11,13 @@ import PureModal
 
 class ViewController: UIViewController {
     
-    let alertController = PureAlertController(withTitle: "Title", message: "message", withStyle: .default(buttonTitle: nil))
-    
     @IBAction func presentAlertButtonTapped(_ sender: UIButton) {
-        alertController.delegate = self
+        let alertController = PureAlertController()
+        
         alertController.title = "Changed Title with Title"
         alertController.alertMessage = "long message very long message long message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long messagelong message very long message"
+        
+        alertController.delegate = self
         alertController.modal(animated: true, for: self)
     }
     
