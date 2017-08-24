@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B30BD9E51F4EB57A0052424E /* PureModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B358410A1F4D10EA007C40F4 /* PureModal.framework */; };
+		B30BD9E61F4EB57A0052424E /* PureModal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B358410A1F4D10EA007C40F4 /* PureModal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B358410F1F4D10EA007C40F4 /* PureModal.h in Headers */ = {isa = PBXBuildFile; fileRef = B358410D1F4D10EA007C40F4 /* PureModal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B35841171F4D11A4007C40F4 /* PureAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35841161F4D11A4007C40F4 /* PureAlertView.swift */; };
 		B358411F1F4D1200007C40F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358411E1F4D1200007C40F4 /* AppDelegate.swift */; };
@@ -15,13 +17,10 @@
 		B35841261F4D1200007C40F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B35841251F4D1200007C40F4 /* Assets.xcassets */; };
 		B35841291F4D1200007C40F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35841271F4D1200007C40F4 /* LaunchScreen.storyboard */; };
 		B35841301F4D1463007C40F4 /* PureAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358412F1F4D1463007C40F4 /* PureAlertController.swift */; };
-		B35841311F4D14D7007C40F4 /* PureModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B358410A1F4D10EA007C40F4 /* PureModal.framework */; };
-		B35841321F4D1571007C40F4 /* PureModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B358410A1F4D10EA007C40F4 /* PureModal.framework */; };
-		B35841331F4D1571007C40F4 /* PureModal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B358410A1F4D10EA007C40F4 /* PureModal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B35841341F4D1571007C40F4 /* PBXContainerItemProxy */ = {
+		B30BD9E71F4EB57A0052424E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B35841011F4D10E9007C40F4 /* Project object */;
 			proxyType = 1;
@@ -31,13 +30,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B35841361F4D1571007C40F4 /* Embed Frameworks */ = {
+		B30BD9E91F4EB57A0052424E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B35841331F4D1571007C40F4 /* PureModal.framework in Embed Frameworks */,
+				B30BD9E61F4EB57A0052424E /* PureModal.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,8 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B35841321F4D1571007C40F4 /* PureModal.framework in Frameworks */,
-				B35841311F4D14D7007C40F4 /* PureModal.framework in Frameworks */,
+				B30BD9E51F4EB57A0052424E /* PureModal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,12 +182,12 @@
 				B35841181F4D1200007C40F4 /* Sources */,
 				B35841191F4D1200007C40F4 /* Frameworks */,
 				B358411A1F4D1200007C40F4 /* Resources */,
-				B35841361F4D1571007C40F4 /* Embed Frameworks */,
+				B30BD9E91F4EB57A0052424E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				B35841351F4D1571007C40F4 /* PBXTargetDependency */,
+				B30BD9E81F4EB57A0052424E /* PBXTargetDependency */,
 			);
 			name = PureModalDemo;
 			productName = PureModalDemo;
@@ -277,10 +275,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B35841351F4D1571007C40F4 /* PBXTargetDependency */ = {
+		B30BD9E81F4EB57A0052424E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B35841091F4D10EA007C40F4 /* PureModal */;
-			targetProxy = B35841341F4D1571007C40F4 /* PBXContainerItemProxy */;
+			targetProxy = B30BD9E71F4EB57A0052424E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
