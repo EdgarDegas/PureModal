@@ -88,7 +88,9 @@ open class PureAlertView: UIView {
             if let confirm = confirmTitle {
                 confirmButton = UIButton(type: .system)
                 confirmButton?.setTitle(confirm, for: .normal)
+                confirmButton?.titleLabel?.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
             }
+            loadDialogueAlertView()
         }
     }
     
@@ -159,8 +161,57 @@ open class PureAlertView: UIView {
         }
     }
     
+    private func loadDialogueAlertView() {
+        func loadCancelAndConfirmButtonStack(under topToAnchor: NSLayoutYAxisAnchor) {
+            if cancelButton == nil {
+                cancelButton = UIButton(type: .system)
+                cancelButton?.setTitle("Cancel", for: .normal)
+            }
+            if confirmButton == nil {
+                confirmButton = UIButton(type: .system)
+                confirmButton?.setTitle("Confirm", for: .normal)
+                confirmButton?.titleLabel?.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
+            }
+            cancelButton?.translatesAutoresizingMaskIntoConstraints = false
+            confirmButton?.translatesAutoresizingMaskIntoConstraints = false
+            cancelButton?.addTarget(self, action: #selector(cancelButtonTapped(sender:)), for: .touchUpInside)
+            confirmButton?.addTarget(self, action: #selector(confirmButtonTapped(sender:)), for: .touchUpInside)
+            
+            let cancelAndConfirmButtonStack = UIStackView(arrangedSubviews: [cancelButton!, confirmButton!])
+            cancelAndConfirmButtonStack.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(cancelAndConfirmButtonStack)
+            cancelAndConfirmButtonStack.axis = .horizontal
+            cancelAndConfirmButtonStack.alignment = .center
+            cancelAndConfirmButtonStack.distribution = .fillProportionally
+            
+            cancelAndConfirmButtonStack.topAnchor.constraint(equalTo: topToAnchor, constant: 20)
+                .isActive = true
+            cancelAndConfirmButtonStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+                .isActive = true
+            cancelAndConfirmButtonStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -20)
+                .isActive = true
+            cancelAndConfirmButtonStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
+                .isActive = true
+        }
+        
+        if let titleAndMessageStack = titleAndMessageStack {
+            titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(titleAndMessageStack)
+            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 20)
+                .isActive = true
+            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -40)
+                .isActive = true
+            titleAndMessageStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
+                .isActive = true
+            loadCancelAndConfirmButtonStack(under: titleAndMessageStack.bottomAnchor)
+        } else {
+            loadCancelAndConfirmButtonStack(under: topAnchor)
+        }
+    }
+    
     private var titleAndMessageStack: UIStackView? {
         let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
@@ -191,5 +242,9 @@ open class PureAlertView: UIView {
 extension PureAlertView {
     @objc private func cancelButtonTapped(sender button: UIButton) {
         delegate?.alertView(self, didTapCancelButton: button)
+    }
+    
+    @objc private func confirmButtonTapped(sender button: UIButton) {
+        delegate?.alertView(self, didTapConfirmButton: button)
     }
 }

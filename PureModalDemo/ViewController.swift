@@ -29,7 +29,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func presentDialogueAlertButtonTapped(_ sender: UIButton) {
-        
+        let dialogueAlertController = PureAlertController()
+        dialogueAlertController.title = "Title"
+        dialogueAlertController.alertTitle = "Are you Sure"
+        dialogueAlertController.alertStyle = PureAlertViewStyle.dialogue(cancelButtonTitle: nil, confirmButtonTitle: nil)
+        dialogueAlertController.delegate = self
+        dialogueAlertController.modal(animated: true, for: self)
     }
     
     override func viewDidLoad() {
