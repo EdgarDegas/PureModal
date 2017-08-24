@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Wak-ca-l8v">
-                                <rect key="frame" x="98" y="284" width="179" height="98"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Wak-ca-l8v">
+                                <rect key="frame" x="98" y="280" width="179" height="106"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kx-aK-Vpz">
                                         <rect key="frame" x="0.0" y="0.0" width="179" height="30"/>
@@ -29,14 +29,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AD-Sk-HjM">
-                                        <rect key="frame" x="0.0" y="34" width="179" height="30"/>
+                                        <rect key="frame" x="0.0" y="38" width="179" height="30"/>
                                         <state key="normal" title="Present AutoDismiss Alert"/>
                                         <connections>
                                             <action selector="presentAutoDismissAlertButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dbf-k0-q62"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9br-sE-6Q4">
-                                        <rect key="frame" x="0.0" y="68" width="179" height="30"/>
+                                        <rect key="frame" x="0.0" y="76" width="179" height="30"/>
                                         <state key="normal" title="Present Dialogue Alert"/>
                                         <connections>
                                             <action selector="presentDialogueAlertButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ke8-3k-MML"/>
