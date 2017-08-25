@@ -10,8 +10,9 @@ import UIKit
 
 /// Style of Pure Alert View.
 ///
-/// - `default`: The default style with title, message and a cancel button (default title: OK)
-/// - autoDismiss: A box with title, message. Disappear after some time (default length: 2 seconds)
+/// - `default`: The default style with title, message and a cancel button (default title: OK).
+/// - autoDismiss: A box with title, message. Disappear after some time (default length: 2 seconds).
+/// - progressIndicator: A box with title, message and a progress view (default style: circle).
 /// - dialogue: A dialogue box with title, message and two buttons.
 public enum PureAlertViewStyle {
     
@@ -20,6 +21,9 @@ public enum PureAlertViewStyle {
     
     /// Title, message. Disappear after some time (default length: 2 seconds)
     case autoDismiss(after: TimeInterval?)
+    
+    /// Title, message, and a progress view (default style: circle)
+    case progressIndicator(ofStyle: PureProgressViewStyle?)
     
     /// Title, message, and two button:
     /// - a cancel button (default title: No)
