@@ -23,7 +23,9 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kx-aK-Vpz">
                                         <rect key="frame" x="0.0" y="0.0" width="179" height="30"/>
-                                        <state key="normal" title="Present Default Alert"/>
+                                        <state key="normal" title="Present Default Alert">
+                                            <color key="titleColor" red="0.0078431372549019607" green="0.47843137254901957" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="presentDefaultAlertButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GBb-Fe-wpF"/>
                                         </connections>
