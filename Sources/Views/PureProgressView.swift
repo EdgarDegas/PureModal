@@ -13,5 +13,9 @@ public enum PureProgressViewStyle {
     case line
 }
 
-class PureProgressView: UIProgressView {
+open class PureProgressView: UIProgressView {
+    convenience init(withStyle style: PureProgressViewStyle?) {
+        self.init(progressViewStyle: .default)
+        translatesAutoresizingMaskIntoConstraints = false
+    }
 }

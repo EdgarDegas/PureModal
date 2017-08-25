@@ -47,6 +47,7 @@ open class PureAlertView: UIView {
     open var cancelButton: UIButton?
     open var confirmButton: UIButton?
     open var dismissTimeout: TimeInterval?
+    open var progressView: PureProgressView?
     
     weak var delegate: PureAlertViewDelegate?
     
@@ -95,6 +96,10 @@ open class PureAlertView: UIView {
                 confirmButton?.titleLabel?.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
             }
             loadDialogueAlertView()
+        case .progressIndicator(let style):
+            if let style = style {
+                progressView = PureProgressView(withStyle: style)
+            }
         }
     }
     
