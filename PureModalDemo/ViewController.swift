@@ -21,9 +21,8 @@ class ViewController: UIViewController {
     
     @IBAction func presentAutoDismissAlertButtonTapped(_ sender: UIButton) {
         let autoDismissAlertController = PureAlertController()
-        autoDismissAlertController.alertTitle = "Title"
-        autoDismissAlertController.alertMessage = "message"
-        autoDismissAlertController.alertStyle = .autoDismiss(after: nil)
+        autoDismissAlertController.alertTitle = "Loading..."
+        autoDismissAlertController.alertStyle = .autoDismiss(after: 1)
         autoDismissAlertController.delegate = self
         autoDismissAlertController.modal(animated: true, for: self)
     }
