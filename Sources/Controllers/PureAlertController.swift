@@ -41,7 +41,7 @@ open class PureAlertController: UIViewController {
     var alertView: PureAlertView!
     public weak var delegate: PureAlertControllerDelegate?
     
-    convenience public init(withTitle title: String?, message: String?, withStyle style: PureAlertViewStyle) {
+    convenience public init(withTitle title: String?, message: String?, withStyle style: PureAlertViewStyle?) {
         self.init()
         alertTitle = title
         alertMessage = message
