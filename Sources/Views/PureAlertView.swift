@@ -219,12 +219,16 @@ open class PureAlertView: UIView {
     }
     
     private var titleAndMessageStack: UIStackView? {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 20
+        let stackView: UIStackView = {
+            let stack = UIStackView()
+            stack.translatesAutoresizingMaskIntoConstraints = false
+            stack.axis = .vertical
+            stack.alignment = .center
+            stack.distribution = .equalSpacing
+            stack.spacing = 20
+            return stack
+        }()
+        
         if let titleLabel = titleLabel {
             titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
