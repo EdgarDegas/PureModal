@@ -51,8 +51,8 @@ open class PureAlertController: UIViewController {
     open func modal(animated: Bool, for viewController: UIViewController) {
         modalPresentationStyle = .overCurrentContext
         shouldPresentedAnimated = animated
-        self.loadWindow()
-        self.loadAlertView()
+        loadWindow()
+        loadAlertView()
         viewController.present(self, animated: true, completion: nil)
         if shouldPresentedAnimated {
             animatedFadeIn()
@@ -89,12 +89,15 @@ open class PureAlertController: UIViewController {
     // MARK: - Initialization
     
     private func loadWindow() {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window.windowLevel = UIWindowLevelAlert
+        window = {
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            window.windowLevel = UIWindowLevelAlert
+            window.rootViewController = UIViewController()
+            window.rootViewController?.view.frame = UIScreen.main.bounds
+            window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.6)
+            return window
+        }()
         window.makeKeyAndVisible()
-        window.rootViewController = UIViewController()
-        window.rootViewController?.view.frame = UIScreen.main.bounds
-        self.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.6)
         window.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(outsideAreaTapped(sender:))))
     }
     
@@ -118,37 +121,54 @@ extension PureAlertController {
     private func animatedFadeIn() {
         self.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0)
         alertView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-        let windowAnimator = UIViewPropertyAnimator(duration: 0.16, curve: .easeOut) {
-            self.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.6)
-        }
-        let timeParameters = UISpringTimingParameters(mass: 0.68, stiffness: 120, damping: 16.8, initialVelocity: CGVector(dx: 14, dy: 14))
-        let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
-        animator.addAnimations {
-            self.alertView.transform = CGAffineTransform(scaleX: 1, y: 1)
-        }
+        
+        let windowAnimator: UIViewPropertyAnimator = {
+            return UIViewPropertyAnimator(duration: 0.16, curve: .easeOut) {
+                self.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.6)
+            }
+        }()
+        
+        let alertViewAnimator: UIViewPropertyAnimator = {
+            let timeParameters = UISpringTimingParameters(mass: 0.68, stiffness: 120, damping: 16.8, initialVelocity: CGVector(dx: 14, dy: 14))
+            let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
+            animator.addAnimations {
+                self.alertView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+            return animator
+        }()
+        
         windowAnimator.startAnimation()
-        animator.startAnimation()
+        alertViewAnimator.startAnimation()
     }
     
     private func animatedFadeOut(completion: (() -> Void)?) {
         for subview in alertView.subviews {
             subview.isHidden = true
         }
-        let windowAnimator = UIViewPropertyAnimator(duration: 0.16, curve: .easeOut) {
-            self.window.rootViewController!.view.backgroundColor = UIColor(white: 0, alpha: 0)
-        }
-        let timeParameters = UISpringTimingParameters(mass: 0.1, stiffness: 120, damping: 1000, initialVelocity: CGVector(dx: 8, dy: 8))
-        let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
-        animator.addAnimations {
-            self.alertView.transform = CGAffineTransform(scaleX: 0.68, y: 0.68)
-            self.alertView.backgroundColor = UIColor(white: 1, alpha: 0)
-        }
-        windowAnimator.addCompletion { _ in
-            self.window = nil
-            super.dismiss(animated: false, completion: completion)
-        }
+        
+        let windowAnimator: UIViewPropertyAnimator = {
+            let animator = UIViewPropertyAnimator(duration: 0.16, curve: .easeOut) {
+                self.window.rootViewController!.view.backgroundColor = UIColor(white: 0, alpha: 0)
+            }
+            animator.addCompletion { _ in
+                self.window = nil
+                super.dismiss(animated: false, completion: completion)
+            }
+            return animator
+        }()
+        
+        let alertViewAnimator: UIViewPropertyAnimator = {
+            let timeParameters = UISpringTimingParameters(mass: 0.1, stiffness: 120, damping: 1000, initialVelocity: CGVector(dx: 8, dy: 8))
+            let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
+            animator.addAnimations {
+                self.alertView.transform = CGAffineTransform(scaleX: 0.68, y: 0.68)
+                self.alertView.backgroundColor = UIColor(white: 1, alpha: 0)
+            }
+            return animator
+        }()
+
         windowAnimator.startAnimation()
-        animator.startAnimation()
+        alertViewAnimator.startAnimation()
     }
 }
 
