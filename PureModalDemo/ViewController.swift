@@ -31,9 +31,16 @@ class ViewController: UIViewController {
         let dialogueAlertController = PureAlertController()
         dialogueAlertController.title = "Title"
         dialogueAlertController.alertTitle = "Are you Sure"
-        dialogueAlertController.alertStyle = PureAlertViewStyle.dialogue(cancelButtonTitle: nil, confirmButtonTitle: nil)
+        dialogueAlertController.alertStyle = .dialogue(cancelButtonTitle: nil, confirmButtonTitle: nil)
         dialogueAlertController.delegate = self
         dialogueAlertController.modal(animated: true, for: self)
+    }
+    
+    @IBAction func presentProgressAlertButtonTapped(_ sender: UIButton) {
+        let progressAlertController = PureAlertController()
+        progressAlertController.alertStyle = .progressIndicator(ofStyle: .spinning)
+        progressAlertController.delegate = self
+        progressAlertController.modal(animated: true, for: self)
     }
     
     override func viewDidLoad() {

@@ -99,7 +99,10 @@ open class PureAlertView: UIView {
         case .progressIndicator(let style):
             if let style = style {
                 progressView = PureProgressView(withStyle: style)
+            } else {
+                progressView = PureProgressView(withStyle: .spinning)
             }
+            setupProgressView()
         }
     }
     
@@ -216,6 +219,20 @@ open class PureAlertView: UIView {
         } else {
             loadCancelAndConfirmButtonStack(under: topAnchor)
         }
+    }
+    
+    private func setupProgressView() {
+        guard let progressView = progressView else {
+            return
+        }
+        
+        addSubview(progressView)
+        progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
+            .isActive = true
+        progressView.topAnchor.constraint(equalTo: topAnchor, constant: 20)
+            .isActive = true
+        progressView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 20)
+            .isActive = true
     }
     
     private var titleAndMessageStack: UIStackView? {
