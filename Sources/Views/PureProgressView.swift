@@ -86,10 +86,6 @@ open class PureProgressView: UIView {
             }
         }.fire()
     }
-    
-    deinit {
-        print("Pure progress")
-    }
 }
 
 extension CGFloat {
