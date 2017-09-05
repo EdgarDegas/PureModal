@@ -64,11 +64,11 @@ open class PureProgressView: UIView {
             outerArc.move(to: centerPoint)
             outerArc.addArc(withCenter: centerPoint, radius: centerPoint.x, startAngle: start.asRadians, endAngle: end.asRadians, clockwise: true)
             outerArc.close()
-            tintColor.setFill()
+            superview?.tintColor.setFill()
             outerArc.fill()
 
             let innerCircle = UIBezierPath(ovalIn: innerRect)
-            self.superview?.backgroundColor?.setFill()
+            superview?.backgroundColor?.setFill()
             innerCircle.fill()
             
             startSpinning()
