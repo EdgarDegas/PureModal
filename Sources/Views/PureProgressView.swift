@@ -78,10 +78,17 @@ open class PureProgressView: UIView {
     }
     
     private func startSpinning() {
-        let timer = Timer.scheduledTimer(withTimeInterval: spinDuration, repeats: true) { _ in
-            self.animator.startAnimation()
-        }
-        timer.fire()
+        Timer.scheduledTimer(withTimeInterval: spinDuration, repeats: true) { [weak self] _ in
+            if let strongSelf = self {
+                let animator = strongSelf.animator
+                animator.startAnimation()
+                strongSelf.currentAnimator = animator
+            }
+        }.fire()
+    }
+    
+    deinit {
+        print("Pure progress")
     }
 }
 
