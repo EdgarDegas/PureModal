@@ -52,6 +52,11 @@ open class PureAlertView: UIView {
     weak var delegate: PureAlertViewDelegate?
     private var style: PureAlertViewStyle!
     
+    private enum AutoLayoutConstants {
+        static let padding: CGFloat = 20
+        static let indicatorWidth: CGFloat = 24
+    }
+    
     // MARK: - Interface
     
     func addTo(view superView: UIView) {
@@ -66,9 +71,10 @@ open class PureAlertView: UIView {
                 widthAnchor.constraint(equalTo: superView.widthAnchor, constant: -120)
                     .isActive = true
             } else {
-                widthAnchor.constraint(equalToConstant: 64)
+                let width = AutoLayoutConstants.padding * 2 + AutoLayoutConstants.indicatorWidth
+                widthAnchor.constraint(equalToConstant: width)
                     .isActive = true
-                layer.cornerRadius = 32
+                layer.cornerRadius = width / 2
             }
         default:
             widthAnchor.constraint(equalTo: superView.widthAnchor, constant: -120)
@@ -116,7 +122,7 @@ open class PureAlertView: UIView {
             } else {
                 progressView = PureProgressView(withStyle: .spinning)
             }
-            setupProgressView()
+            loadProgressView()
         }
     }
     
@@ -143,9 +149,9 @@ open class PureAlertView: UIView {
             cancelButton?.addTarget(self, action: #selector(cancelButtonTapped(sender:)), for: .touchUpInside)
             cancelButton?.translatesAutoresizingMaskIntoConstraints = false
             addSubview(cancelButton!)
-            cancelButton?.topAnchor.constraint(equalTo: topToAnchor, constant: 20)
+            cancelButton?.topAnchor.constraint(equalTo: topToAnchor, constant: AutoLayoutConstants.padding)
                 .isActive = true
-            cancelButton?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+            cancelButton?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -AutoLayoutConstants.padding)
                 .isActive = true
             cancelButton?.centerXAnchor.constraint(equalTo: centerXAnchor)
                 .isActive = true
@@ -154,9 +160,9 @@ open class PureAlertView: UIView {
         if let titleAndMessageStack = titleAndMessageStack {
             titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
             addSubview(titleAndMessageStack)
-            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 20)
+            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: AutoLayoutConstants.padding)
                 .isActive = true
-            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -40)
+            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -AutoLayoutConstants.padding * 2)
                 .isActive = true
             titleAndMessageStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
                 .isActive = true
@@ -167,7 +173,6 @@ open class PureAlertView: UIView {
     }
     
     private func loadAutoDismissAlertView() {
-        
         var timeout: TimeInterval = 2
         if dismissTimeout != nil {
             timeout = dismissTimeout!
@@ -182,13 +187,13 @@ open class PureAlertView: UIView {
         if let titleAndMessageStack = titleAndMessageStack {
             titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
             addSubview(titleAndMessageStack)
-            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 20)
+            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: AutoLayoutConstants.padding)
                 .isActive = true
-            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -40)
+            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -AutoLayoutConstants.padding * 2)
                 .isActive = true
             titleAndMessageStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
                 .isActive = true
-            titleAndMessageStack.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: -20)
+            titleAndMessageStack.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: -AutoLayoutConstants.padding)
                 .isActive = true
         }
     }
@@ -216,11 +221,11 @@ open class PureAlertView: UIView {
             cancelAndConfirmButtonStack.alignment = .center
             cancelAndConfirmButtonStack.distribution = .fillProportionally
             
-            cancelAndConfirmButtonStack.topAnchor.constraint(equalTo: topToAnchor, constant: 20)
+            cancelAndConfirmButtonStack.topAnchor.constraint(equalTo: topToAnchor, constant: AutoLayoutConstants.padding)
                 .isActive = true
-            cancelAndConfirmButtonStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+            cancelAndConfirmButtonStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -AutoLayoutConstants.padding)
                 .isActive = true
-            cancelAndConfirmButtonStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -20)
+            cancelAndConfirmButtonStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -AutoLayoutConstants.padding)
                 .isActive = true
             cancelAndConfirmButtonStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
                 .isActive = true
@@ -229,9 +234,9 @@ open class PureAlertView: UIView {
         if let titleAndMessageStack = titleAndMessageStack {
             titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
             addSubview(titleAndMessageStack)
-            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 20)
+            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: AutoLayoutConstants.padding)
                 .isActive = true
-            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -40)
+            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -AutoLayoutConstants.padding * 2)
                 .isActive = true
             titleAndMessageStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
                 .isActive = true
@@ -241,23 +246,42 @@ open class PureAlertView: UIView {
         }
     }
     
-    private func setupProgressView() {
+    private func loadProgressView() {
         guard let progressView = progressView else {
             return
         }
         
+        func loadProgressIndicator(trailingTo trailingToAnchor: NSLayoutXAxisAnchor) {
+            progressView.translatesAutoresizingMaskIntoConstraints = false
+            progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: AutoLayoutConstants.padding)
+                .isActive = true
+            progressView.widthAnchor.constraint(equalToConstant: AutoLayoutConstants.indicatorWidth)
+                .isActive = true
+            progressView.heightAnchor.constraint(equalToConstant: AutoLayoutConstants.indicatorWidth)
+                .isActive = true
+            progressView.topAnchor.constraint(equalTo: topAnchor, constant: AutoLayoutConstants.padding)
+                .isActive = true
+            progressView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -AutoLayoutConstants.padding)
+                .isActive = true
+        }
+        
         addSubview(progressView)
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
-            .isActive = true
-        progressView.widthAnchor.constraint(equalToConstant: 24)
-            .isActive = true
-        progressView.heightAnchor.constraint(equalToConstant: 24)
-            .isActive = true
-        progressView.topAnchor.constraint(equalTo: topAnchor, constant: 20)
-            .isActive = true
-        progressView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
-            .isActive = true
+        if let titleAndMessageStack = titleAndMessageStack {
+            titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
+            titleAndMessageStack.alignment = .leading
+            addSubview(titleAndMessageStack)
+            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: AutoLayoutConstants.padding)
+                .isActive = true
+            titleAndMessageStack.bottomAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: -AutoLayoutConstants.padding)
+            
+            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -AutoLayoutConstants.padding * 2)
+                .isActive = true
+            titleAndMessageStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
+                .isActive = true
+            loadProgressIndicator(trailingTo: titleAndMessageStack.trailingAnchor)
+        } else {
+            loadProgressIndicator(trailingTo: trailingAnchor)
+        }
     }
     
     private var titleAndMessageStack: UIStackView? {
@@ -267,7 +291,7 @@ open class PureAlertView: UIView {
             stack.axis = .vertical
             stack.alignment = .center
             stack.distribution = .equalSpacing
-            stack.spacing = 20
+            stack.spacing = AutoLayoutConstants.padding
             return stack
         }()
         
