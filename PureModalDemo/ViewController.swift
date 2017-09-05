@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         progressAlertController.alertStyle = .progressIndicator(ofStyle: .spinning)
         progressAlertController.delegate = self
         progressAlertController.modal(animated: true, for: self)
-        Timer.scheduledTimer(withTimeInterval: 9, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
             progressAlertController.dismiss()
         }
     }

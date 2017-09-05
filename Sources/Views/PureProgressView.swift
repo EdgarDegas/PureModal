@@ -15,8 +15,10 @@ public enum PureProgressViewStyle {
 
 open class PureProgressView: UIView {
     var style: PureProgressViewStyle!
-    let spinDuration = 1.6
-    var animator: UIViewPropertyAnimator {
+    var spinDuration: TimeInterval = 1.6
+    var currentAnimator: UIViewPropertyAnimator?
+    
+    private var animator: UIViewPropertyAnimator {
         let angle: CGFloat = 180
         let rotate: () -> Void = {
             self.transform = self.transform.rotated(by: angle.asRadians)
@@ -26,8 +28,6 @@ open class PureProgressView: UIView {
         animator.addAnimations(rotate)
         return animator
     }
-    
-    var currentAnimator: UIViewPropertyAnimator?
     
     public init(withStyle style: PureProgressViewStyle) {
         super.init(frame: CGRect(x: 20, y: 20, width: 32, height: 32))
