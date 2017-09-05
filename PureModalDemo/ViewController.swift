@@ -57,7 +57,7 @@ extension ViewController: PureAlertControllerDelegate {
     }
     
     func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapOutsideArea area: UIView?) {
-        switch controller.alertStyle! {
+        switch controller.alertStyle {
         case .autoDismiss:
             controller.dismiss(animated: true, completion: nil)
         default:
@@ -66,7 +66,7 @@ extension ViewController: PureAlertControllerDelegate {
     }
     
     func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapNonButtonArea area: UIView?) {
-        switch controller.alertStyle! {
+        switch controller.alertStyle {
         case .autoDismiss:
             controller.dismiss(animated: true, completion: nil)
         default:

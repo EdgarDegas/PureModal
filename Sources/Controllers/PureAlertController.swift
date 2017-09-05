@@ -35,7 +35,7 @@ open class PureAlertController: UIViewController {
     public var tintColor: UIColor?
     public var alertTitle: String?
     public var alertMessage: String?
-    public var alertStyle: PureAlertViewStyle?
+    public var alertStyle = PureAlertViewStyle.default(buttonTitle: nil)
     var shouldPresentedAnimated: Bool!
     var window: UIWindow!
     var alertView: PureAlertView!
@@ -45,7 +45,9 @@ open class PureAlertController: UIViewController {
         self.init()
         alertTitle = title
         alertMessage = message
-        alertStyle = style
+        if style != nil {
+            alertStyle = style!
+        }
     }
     
     open func modal(animated: Bool, for viewController: UIViewController) {
@@ -106,7 +108,7 @@ open class PureAlertController: UIViewController {
     }
     
     private func loadAlertView() {
-        alertView = PureAlertView(withTitle: alertTitle, message: alertMessage, style: alertStyle ?? .default(buttonTitle: nil))
+        alertView = PureAlertView(withTitle: alertTitle, message: alertMessage, style: alertStyle)
         if let tintColor = tintColor {
             alertView.tintColor = tintColor
         }
