@@ -38,6 +38,8 @@ class ViewController: UIViewController {
     
     @IBAction func presentProgressAlertButtonTapped(_ sender: UIButton) {
         let progressAlertController = PureAlertController()
+        progressAlertController.alertTitle = "Loading..."
+        progressAlertController.alertMessage = "Something is loading..."
         progressAlertController.alertStyle = .progressIndicator(ofStyle: .spinning)
         progressAlertController.delegate = self
         progressAlertController.modal(animated: true, for: self)

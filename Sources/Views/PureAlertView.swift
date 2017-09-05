@@ -251,8 +251,7 @@ open class PureAlertView: UIView {
             return
         }
         
-        func loadProgressIndicator(trailingTo trailingToAnchor: NSLayoutXAxisAnchor) {
-            progressView.translatesAutoresizingMaskIntoConstraints = false
+        func loadProgressIndicator() {
             progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: AutoLayoutConstants.padding)
                 .isActive = true
             progressView.widthAnchor.constraint(equalToConstant: AutoLayoutConstants.indicatorWidth)
@@ -265,22 +264,37 @@ open class PureAlertView: UIView {
                 .isActive = true
         }
         
+        progressView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(progressView)
+        loadProgressIndicator()
+        
         if let titleAndMessageStack = titleAndMessageStack {
-            titleAndMessageStack.translatesAutoresizingMaskIntoConstraints = false
+            progressView.removeConstraints(progressView.constraints)
+            progressView.widthAnchor.constraint(equalToConstant: AutoLayoutConstants.indicatorWidth)
+                .isActive = true
+            progressView.heightAnchor.constraint(equalToConstant: AutoLayoutConstants.indicatorWidth)
+                .isActive = true
             titleAndMessageStack.alignment = .leading
-            addSubview(titleAndMessageStack)
-            titleAndMessageStack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: AutoLayoutConstants.padding)
-                .isActive = true
-            titleAndMessageStack.bottomAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: -AutoLayoutConstants.padding)
             
-            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -(AutoLayoutConstants.padding * 3 + AutoLayoutConstants.indicatorWidth) )
+            let indicatorAndTextStack: UIStackView = {
+                let stack = UIStackView(arrangedSubviews: [progressView, titleAndMessageStack])
+                stack.translatesAutoresizingMaskIntoConstraints = false
+                stack.alignment = .center
+                stack.axis = .horizontal
+                stack.distribution = .equalSpacing
+                stack.spacing = AutoLayoutConstants.padding
+                return stack
+            }()
+            
+            addSubview(indicatorAndTextStack)
+            indicatorAndTextStack.topAnchor.constraint(equalTo: topAnchor, constant: AutoLayoutConstants.padding)
                 .isActive = true
-            titleAndMessageStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
+            indicatorAndTextStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -AutoLayoutConstants.padding)
                 .isActive = true
-            loadProgressIndicator(trailingTo: titleAndMessageStack.trailingAnchor)
-        } else {
-            loadProgressIndicator(trailingTo: trailingAnchor)
+            indicatorAndTextStack.centerXAnchor.constraint(equalTo: centerXAnchor)
+                .isActive = true
+            indicatorAndTextStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -AutoLayoutConstants.padding * 3 - AutoLayoutConstants.indicatorWidth)
+                .isActive = true
         }
     }
     
