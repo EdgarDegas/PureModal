@@ -50,6 +50,7 @@ open class PureAlertView: UIView {
     open var progressView: PureProgressView?
     
     weak var delegate: PureAlertViewDelegate?
+    private var style: PureAlertViewStyle!
     
     // MARK: - Interface
     
@@ -59,13 +60,26 @@ open class PureAlertView: UIView {
             .isActive = true
         centerYAnchor.constraint(equalTo: superView.centerYAnchor)
             .isActive = true
-        widthAnchor.constraint(equalTo: superView.widthAnchor, constant: -120)
-            .isActive = true
+        switch style! {
+        case .progressIndicator:
+            if messageLabel != nil || titleLabel != nil {
+                widthAnchor.constraint(equalTo: superView.widthAnchor, constant: -120)
+                    .isActive = true
+            } else {
+                widthAnchor.constraint(equalToConstant: 64)
+                    .isActive = true
+                layer.cornerRadius = 32
+            }
+        default:
+            widthAnchor.constraint(equalTo: superView.widthAnchor, constant: -120)
+                .isActive = true
+        }
     }
     
     convenience public init(withTitle title: String?, message: String?, style: PureAlertViewStyle) {
         self.init()
         setupAppearance()
+        self.style = style
         
         if let title = title {
             titleLabel = UILabel()
