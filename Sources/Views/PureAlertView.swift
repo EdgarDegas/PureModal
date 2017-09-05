@@ -274,7 +274,7 @@ open class PureAlertView: UIView {
                 .isActive = true
             titleAndMessageStack.bottomAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: -AutoLayoutConstants.padding)
             
-            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -AutoLayoutConstants.padding * 2)
+            titleAndMessageStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -(AutoLayoutConstants.padding * 3 + AutoLayoutConstants.indicatorWidth) )
                 .isActive = true
             titleAndMessageStack.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor)
                 .isActive = true
