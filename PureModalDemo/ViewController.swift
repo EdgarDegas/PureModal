@@ -10,7 +10,6 @@ import UIKit
 import PureModal
 
 class ViewController: UIViewController {
-    
     @IBAction func presentDefaultAlertButtonTapped(_ sender: UIButton) {
         let alertController = PureAlertController()
         alertController.title = "Changed Title with Title"
@@ -21,8 +20,9 @@ class ViewController: UIViewController {
     
     @IBAction func presentAutoDismissAlertButtonTapped(_ sender: UIButton) {
         let autoDismissAlertController = PureAlertController()
-        autoDismissAlertController.alertTitle = "Loading..."
-        autoDismissAlertController.alertStyle = .autoDismiss(after: 1)
+        autoDismissAlertController.alertTitle = "Not Signed In"
+        autoDismissAlertController.alertMessage = "Sign in to continue."
+        autoDismissAlertController.alertStyle = .autoDismiss(after: 1.5)
         autoDismissAlertController.delegate = self
         autoDismissAlertController.modal(animated: true, for: self)
     }
@@ -45,15 +45,6 @@ class ViewController: UIViewController {
             progressAlertController.dismiss()
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
 }
 
 extension ViewController: PureAlertControllerDelegate {
@@ -63,5 +54,14 @@ extension ViewController: PureAlertControllerDelegate {
     
     func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didReachDismissTimeout timeout: TimeInterval) {
         controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapOutsideArea area: UIView?) {
+        switch controller.alertStyle! {
+        case .autoDismiss:
+            controller.dismiss(animated: true, completion: nil)
+        default:
+            break
+        }
     }
 }
