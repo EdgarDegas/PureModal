@@ -129,7 +129,6 @@ open class PureAlertView: UIView {
     
     @objc private func nonButtonAreaTapped(sender recognizer: UIGestureRecognizer) {
         delegate?.alertView(self, didTapNonButtonArea: recognizer.view)
-        print("nonButtonAreaTapped")
     }
     
     
