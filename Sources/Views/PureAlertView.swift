@@ -230,10 +230,9 @@ open class PureAlertView: UIView {
         progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
             .isActive = true
-        
-        progressView.widthAnchor.constraint(equalToConstant: 32)
+        progressView.widthAnchor.constraint(equalToConstant: 24)
             .isActive = true
-        progressView.heightAnchor.constraint(equalToConstant: 32)
+        progressView.heightAnchor.constraint(equalToConstant: 24)
             .isActive = true
         progressView.topAnchor.constraint(equalTo: topAnchor, constant: 20)
             .isActive = true

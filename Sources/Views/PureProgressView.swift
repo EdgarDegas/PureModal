@@ -15,7 +15,7 @@ public enum PureProgressViewStyle {
 
 open class PureProgressView: UIView {
     var style: PureProgressViewStyle!
-    var spinDuration: TimeInterval = 1.6
+    var spinDuration: TimeInterval = 1
     var currentAnimator: UIViewPropertyAnimator?
     
     private var animator: UIViewPropertyAnimator {
@@ -49,7 +49,7 @@ open class PureProgressView: UIView {
         }()
 
         let innerRect: CGRect = {
-            let ringWidth: CGFloat = 4.8
+            let ringWidth: CGFloat = 3.6
             let width = self.bounds.size.width - ringWidth * 2
 
             let size = CGSize(width: width, height: width)
