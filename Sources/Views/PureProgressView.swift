@@ -13,10 +13,30 @@ public enum PureProgressViewStyle {
     case progress
 }
 
-open class PureProgressView: UIView {
-    var style: PureProgressViewStyle!
+protocol HasRing {
+    func drawInnerCircle(inView view: UIView)
+    func drawOuterArc(inView view: UIView)
+}
+
+protocol RingSpinning: HasRing {
+    var spinDuration: TimeInterval { get set }
+    func startSpinning()
+}
+
+protocol ProgressIndicatable: HasRing {
+    var progress: Float { get set }
+}
+
+class ProgressIndicatableProgressView: UIView, ProgressIndicatable {
+    var progress: Float = 0.0
+    
+    
+    func drawOuterArc(inView view: UIView) {
+    }
+}
+
+class RingSpinningProgressView: UIView, RingSpinning {
     var spinDuration: TimeInterval = 1
-    var currentAnimator: UIViewPropertyAnimator?
     
     private var animator: UIViewPropertyAnimator {
         let angle: CGFloat = 180
@@ -29,10 +49,9 @@ open class PureProgressView: UIView {
         return animator
     }
     
-    public init(withStyle style: PureProgressViewStyle) {
+    init() {
         super.init(frame: CGRect(x: 20, y: 20, width: 32, height: 32))
         backgroundColor = UIColor(white: 0, alpha: 0)
-        self.style = style
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -41,48 +60,33 @@ open class PureProgressView: UIView {
     
 
     open override func draw(_ rect: CGRect) {
-        let centerPoint: CGPoint = {
-            var point = CGPoint()
-            point.x = self.bounds.midX
-            point.y = self.bounds.midY
-            return point
-        }()
-
-        let innerRect: CGRect = {
-            let ringWidth: CGFloat = 3.6
-            let width = self.bounds.size.width - ringWidth * 2
-
-            let size = CGSize(width: width, height: width)
-            let origin = CGPoint(x: ringWidth, y: ringWidth)
-            return CGRect(origin: origin, size: size)
-        }()
-
-        switch style {
-        case .spinning:
-            let start: CGFloat = -90, end: CGFloat = 132
-            let outerArc = UIBezierPath()
-            outerArc.move(to: centerPoint)
-            outerArc.addArc(withCenter: centerPoint, radius: centerPoint.x, startAngle: start.asRadians, endAngle: end.asRadians, clockwise: true)
-            outerArc.close()
-            tintColor.setFill()
-            outerArc.fill()
-
-            let innerCircle = UIBezierPath(ovalIn: innerRect)
-            UIColor.white.setFill()
-            innerCircle.fill()
-            
-            startSpinning()
-        default:
-            break
-        }
+        drawOuterArc(inView: self)
+        drawInnerCircle(inView: self)
+        startSpinning()
     }
     
-    private func startSpinning() {
+    func drawOuterArc(inView view: UIView) {
+        let centerPoint: CGPoint = {
+            var point = CGPoint()
+            point.x = view.bounds.midX
+            point.y = view.bounds.midY
+            return point
+        }()
+        
+        let start: CGFloat = -90, end: CGFloat = 132
+        let outerArc = UIBezierPath()
+        outerArc.move(to: centerPoint)
+        outerArc.addArc(withCenter: centerPoint, radius: centerPoint.x, startAngle: start.asRadians, endAngle: end.asRadians, clockwise: true)
+        outerArc.close()
+        tintColor.setFill()
+        outerArc.fill()
+    }
+    
+    func startSpinning() {
         Timer.scheduledTimer(withTimeInterval: spinDuration, repeats: true) { [weak self] _ in
             if let strongSelf = self {
                 let animator = strongSelf.animator
                 animator.startAnimation()
-                strongSelf.currentAnimator = animator
             }
         }.fire()
     }

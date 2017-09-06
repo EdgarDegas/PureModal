@@ -47,7 +47,7 @@ open class PureAlertView: UIView {
     open var cancelButton: UIButton?
     open var confirmButton: UIButton?
     open var dismissTimeout: TimeInterval?
-    open var progressView: PureProgressView?
+    var progressView: RingSpinningProgressView?
     
     weak var delegate: PureAlertViewDelegate?
     private var style: PureAlertViewStyle!
@@ -118,9 +118,13 @@ open class PureAlertView: UIView {
             loadDialogueAlertView()
         case .progressIndicator(let style):
             if let style = style {
-                progressView = PureProgressView(withStyle: style)
+                switch style {
+                case .spinning:
+                    progressView = RingSpinningProgressView()
+                default: break
+                }
             } else {
-                progressView = PureProgressView(withStyle: .spinning)
+                progressView = RingSpinningProgressView()
             }
             loadProgressView()
         }

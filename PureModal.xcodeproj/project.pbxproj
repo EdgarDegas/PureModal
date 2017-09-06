@@ -17,6 +17,7 @@
 		B35841261F4D1200007C40F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B35841251F4D1200007C40F4 /* Assets.xcassets */; };
 		B35841291F4D1200007C40F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35841271F4D1200007C40F4 /* LaunchScreen.storyboard */; };
 		B35841301F4D1463007C40F4 /* PureAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358412F1F4D1463007C40F4 /* PureAlertController.swift */; };
+		B36B90861F5F94DD00D72C94 /* ProtocolsAboutDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B90851F5F94DD00D72C94 /* ProtocolsAboutDrawing.swift */; };
 		B3C64B2E1F5D4FF9000A012E /* PureModalDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C64B2D1F5D4FF9000A012E /* PureModalDemoUITests.swift */; };
 		B3DFB8401F4FC78100B09763 /* PureProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DFB83F1F4FC78100B09763 /* PureProgressView.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		B35841281F4D1200007C40F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B358412A1F4D1200007C40F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B358412F1F4D1463007C40F4 /* PureAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureAlertController.swift; sourceTree = "<group>"; };
+		B36B90851F5F94DD00D72C94 /* ProtocolsAboutDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolsAboutDrawing.swift; sourceTree = "<group>"; };
 		B3C64B2B1F5D4FF9000A012E /* PureModalDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PureModalDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3C64B2D1F5D4FF9000A012E /* PureModalDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureModalDemoUITests.swift; sourceTree = "<group>"; };
 		B3C64B2F1F5D4FF9000A012E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		B30997371F4D1EB2007570B1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B36B90851F5F94DD00D72C94 /* ProtocolsAboutDrawing.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B36B90861F5F94DD00D72C94 /* ProtocolsAboutDrawing.swift in Sources */,
 				B35841301F4D1463007C40F4 /* PureAlertController.swift in Sources */,
 				B35841171F4D11A4007C40F4 /* PureAlertView.swift in Sources */,
 				B3DFB8401F4FC78100B09763 /* PureProgressView.swift in Sources */,
