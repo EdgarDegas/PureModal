@@ -7,12 +7,25 @@
 		<key>PureModal.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>PureModalDemo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>B358411B1F4D1200007C40F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3C64B2A1F5D4FF9000A012E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
