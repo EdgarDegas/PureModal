@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         let progressAlertController = PureAlertController()
         progressAlertController.alertTitle = "Loading..."
         progressAlertController.alertMessage = "Something is loading..."
-        progressAlertController.alertStyle = .progressIndicator(ofStyle: .spinning)
+        progressAlertController.alertStyle = .progressIndicator(ofStyle: .progress)
         progressAlertController.delegate = self
         progressAlertController.modal(animated: true, for: self)
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in

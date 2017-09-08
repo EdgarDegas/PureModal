@@ -13,32 +13,66 @@ public enum PureProgressViewStyle {
     case progress
 }
 
-protocol HasRing {
+protocol PureProgressView {
     func drawInnerCircle(inView view: UIView)
     func drawOuterArc(inView view: UIView)
 }
 
-protocol RingSpinning: HasRing {
+protocol RingSpinning: PureProgressView {
+    var animator: UIViewPropertyAnimator { get }
     var spinDuration: TimeInterval { get set }
     func startSpinning()
 }
 
-protocol ProgressIndicatable: HasRing {
+protocol ProgressIndicatable: PureProgressView {
     var progress: Float { get set }
+    func startProgressAnimation()
 }
 
 class ProgressIndicatableProgressView: UIView, ProgressIndicatable {
     var progress: Float = 0.0
     
+    init() {
+        super.init(frame: CGRect(x: 20, y: 20, width: 32, height: 32))
+        backgroundColor = UIColor(white: 0, alpha: 0)
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func draw(_ rect: CGRect) {
+        let animator = UIViewPropertyAnimator(duration: 20, curve: .easeInOut, animations: {
+            self.drawOuterArc(inView: self)
+        })
+        animator.startAnimation()
+        drawInnerCircle(inView: self)
+    }
     
     func drawOuterArc(inView view: UIView) {
+        let centerPoint: CGPoint = {
+            var point = CGPoint()
+            point.x = view.bounds.midX
+            point.y = view.bounds.midY
+            return point
+        }()
+        
+        let start: CGFloat = -90, end: CGFloat = 270
+        let outerArc = UIBezierPath()
+        outerArc.move(to: centerPoint)
+        outerArc.addArc(withCenter: centerPoint, radius: centerPoint.x, startAngle: start.asRadians, endAngle: end.asRadians, clockwise: true)
+        outerArc.close()
+        tintColor.setFill()
+        outerArc.fill()
+    }
+    
+    func startProgressAnimation() {
     }
 }
 
 class RingSpinningProgressView: UIView, RingSpinning {
     var spinDuration: TimeInterval = 1
-    
-    private var animator: UIViewPropertyAnimator {
+    var animator: UIViewPropertyAnimator {
         let angle: CGFloat = 180
         let rotate: () -> Void = {
             self.transform = self.transform.rotated(by: angle.asRadians)
@@ -59,7 +93,7 @@ class RingSpinningProgressView: UIView, RingSpinning {
     }
     
 
-    open override func draw(_ rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         drawOuterArc(inView: self)
         drawInnerCircle(inView: self)
         startSpinning()

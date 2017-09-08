@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension HasRing {
+extension PureProgressView {
     func drawInnerCircle(inView view: UIView) {
         let innerRect: CGRect = {
             let ringWidth: CGFloat = 3.6
