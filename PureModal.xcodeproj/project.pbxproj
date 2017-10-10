@@ -17,7 +17,7 @@
 		B35841261F4D1200007C40F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B35841251F4D1200007C40F4 /* Assets.xcassets */; };
 		B35841291F4D1200007C40F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35841271F4D1200007C40F4 /* LaunchScreen.storyboard */; };
 		B35841301F4D1463007C40F4 /* PureAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358412F1F4D1463007C40F4 /* PureAlertController.swift */; };
-		B36906491F8C5AD800AEA7A5 /* PureModalDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36906481F8C5AD800AEA7A5 /* PureModalDelegates.swift */; };
+		B36906491F8C5AD800AEA7A5 /* PureModalProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36906481F8C5AD800AEA7A5 /* PureModalProtocols.swift */; };
 		B369064B1F8C5B9F00AEA7A5 /* PureModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369064A1F8C5B9F00AEA7A5 /* PureModalController.swift */; };
 		B369064D1F8C5BCC00AEA7A5 /* PureModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369064C1F8C5BCC00AEA7A5 /* PureModalView.swift */; };
 		B369064F1F8C5EFD00AEA7A5 /* PureModalDelegates+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369064E1F8C5EFD00AEA7A5 /* PureModalDelegates+Extensions.swift */; };
@@ -72,7 +72,7 @@
 		B35841281F4D1200007C40F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B358412A1F4D1200007C40F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B358412F1F4D1463007C40F4 /* PureAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureAlertController.swift; sourceTree = "<group>"; };
-		B36906481F8C5AD800AEA7A5 /* PureModalDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureModalDelegates.swift; sourceTree = "<group>"; };
+		B36906481F8C5AD800AEA7A5 /* PureModalProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureModalProtocols.swift; sourceTree = "<group>"; };
 		B369064A1F8C5B9F00AEA7A5 /* PureModalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureModalController.swift; sourceTree = "<group>"; };
 		B369064C1F8C5BCC00AEA7A5 /* PureModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureModalView.swift; sourceTree = "<group>"; };
 		B369064E1F8C5EFD00AEA7A5 /* PureModalDelegates+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PureModalDelegates+Extensions.swift"; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 		B36906471F8C5AAE00AEA7A5 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				B36906481F8C5AD800AEA7A5 /* PureModalDelegates.swift */,
+				B36906481F8C5AD800AEA7A5 /* PureModalProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -356,7 +356,7 @@
 				B35841301F4D1463007C40F4 /* PureAlertController.swift in Sources */,
 				B35841171F4D11A4007C40F4 /* PureAlertView.swift in Sources */,
 				B3DFB8401F4FC78100B09763 /* PureProgressView.swift in Sources */,
-				B36906491F8C5AD800AEA7A5 /* PureModalDelegates.swift in Sources */,
+				B36906491F8C5AD800AEA7A5 /* PureModalProtocols.swift in Sources */,
 				B369064D1F8C5BCC00AEA7A5 /* PureModalView.swift in Sources */,
 				B36906511F8C627400AEA7A5 /* PureCardController.swift in Sources */,
 				B369064B1F8C5B9F00AEA7A5 /* PureModalController.swift in Sources */,

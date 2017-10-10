@@ -1,5 +1,5 @@
 //
-//  PureModalDelegates.swift
+//  PureModalProtocols.swift
 //  PureModal
 //
 //  Created by 孙一萌 on 2017/10/10.
