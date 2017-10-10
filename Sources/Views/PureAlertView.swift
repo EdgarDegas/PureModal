@@ -31,14 +31,13 @@ public enum PureAlertViewStyle {
     case dialogue(cancelButtonTitle: String?, confirmButtonTitle: String?)
 }
 
-protocol PureAlertViewDelegate: class {
+protocol PureAlertViewDelegate: PureModalViewDelegate {
     func alertView(_ alertView: PureAlertView, didTapCancelButton cancelButton: UIButton)
     func alertView(_ alertView: PureAlertView, didTapConfirmButton confirmButton: UIButton)
-    func alertView(_ alertView: PureAlertView, didTapNonButtonArea area: UIView?)
     func alertView(_ alertView: PureAlertView, didReachDismissTimeout timeout: TimeInterval)
 }
 
-open class PureAlertView: UIView {
+open class PureAlertView: PureModalView {
     
     // MARK: - Variables
 
@@ -119,6 +118,8 @@ open class PureAlertView: UIView {
             if let style = style {
                 if style == .progress {
                     loadProgressView(ProgressIndicatableProgressView())
+                } else {
+                    loadProgressView(RingSpinningProgressView())
                 }
             } else {
                 loadProgressView(RingSpinningProgressView())
@@ -134,7 +135,7 @@ open class PureAlertView: UIView {
     }
     
     @objc private func nonButtonAreaTapped(sender recognizer: UIGestureRecognizer) {
-        delegate?.alertView(self, didTapNonButtonArea: recognizer.view)
+        delegate?.modalView(self, didTapNonButtonArea: recognizer.view)
     }
     
     

@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         let autoDismissAlertController = PureAlertController()
         autoDismissAlertController.alertTitle = "Not Signed In"
         autoDismissAlertController.alertMessage = "Sign in to continue."
-        autoDismissAlertController.alertStyle = .autoDismiss(after: 1.5)
+        autoDismissAlertController.alertStyle = .autoDismiss(after: 2)
         autoDismissAlertController.delegate = self
         autoDismissAlertController.modal(animated: true, for: self)
     }
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         let progressAlertController = PureAlertController()
         progressAlertController.alertTitle = "Loading..."
         progressAlertController.alertMessage = "Something is loading..."
-        progressAlertController.alertStyle = .progressIndicator(ofStyle: .progress)
+        progressAlertController.alertStyle = .progressIndicator(ofStyle: .spinning)
         progressAlertController.delegate = self
         progressAlertController.modal(animated: true, for: self)
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
@@ -58,7 +58,10 @@ extension ViewController: PureAlertControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
     
-    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapOutsideArea area: UIView?) {
+    func modalController(_ controller: PureModalController, didTapOuterAreaOfModalView modalView: PureModalView) {
+        guard let controller = controller as? PureAlertController else {
+            return
+        }
         switch controller.alertStyle {
         case .autoDismiss:
             controller.dismiss(animated: true, completion: nil)
@@ -67,7 +70,10 @@ extension ViewController: PureAlertControllerDelegate {
         }
     }
     
-    func alertView(_ alertView: PureAlertView, in controller: PureAlertController, didTapNonButtonArea area: UIView?) {
+    func modalController(_ controller: PureModalController, didTapNonButtonArea area: UIView?, ofModalView modalView: PureModalView) {
+        guard let controller = controller as? PureAlertController else {
+            return
+        }
         switch controller.alertStyle {
         case .autoDismiss:
             controller.dismiss(animated: true, completion: nil)
