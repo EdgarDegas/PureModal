@@ -13,15 +13,15 @@ class ViewController: UIViewController {
     @IBAction func presentDefaultAlertButtonTapped(_ sender: UIButton) {
         let alertController = PureAlertController()
         alertController.title = "Changed Title with Title"
-        alertController.alertMessage = "message message message"
+        alertController.modalMessage = "message message message"
         alertController.delegate = self
         alertController.modal(animated: true, for: self)
     }
     
     @IBAction func presentAutoDismissAlertButtonTapped(_ sender: UIButton) {
         let autoDismissAlertController = PureAlertController()
-        autoDismissAlertController.alertTitle = "Not Signed In"
-        autoDismissAlertController.alertMessage = "Sign in to continue."
+        autoDismissAlertController.modalTitle = "Not Signed In"
+        autoDismissAlertController.modalMessage = "Sign in to continue."
         autoDismissAlertController.alertStyle = .autoDismiss(after: 2)
         autoDismissAlertController.delegate = self
         autoDismissAlertController.modal(animated: true, for: self)
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     @IBAction func presentDialogueAlertButtonTapped(_ sender: UIButton) {
         let dialogueAlertController = PureAlertController()
         dialogueAlertController.title = "Title"
-        dialogueAlertController.alertTitle = "Are you Sure"
+        dialogueAlertController.modalTitle = "Are you Sure"
         dialogueAlertController.alertStyle = .dialogue(cancelButtonTitle: nil, confirmButtonTitle: nil)
         dialogueAlertController.delegate = self
         dialogueAlertController.modal(animated: true, for: self)
@@ -38,8 +38,8 @@ class ViewController: UIViewController {
     
     @IBAction func presentProgressAlertButtonTapped(_ sender: UIButton) {
         let progressAlertController = PureAlertController()
-        progressAlertController.alertTitle = "Loading..."
-        progressAlertController.alertMessage = "Something is loading..."
+        progressAlertController.modalTitle = "Loading..."
+        progressAlertController.modalMessage = "Something is loading..."
         progressAlertController.alertStyle = .progressIndicator(ofStyle: .spinning)
         progressAlertController.delegate = self
         progressAlertController.modal(animated: true, for: self)

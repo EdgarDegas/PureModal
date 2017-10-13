@@ -8,6 +8,18 @@
 
 import UIKit
 
-open class PureModalController: UIViewController {
+open class PureModalController: UIViewController, PureModal {
+    public var tintColor: UIColor?
     
+    public var window: UIWindow!
+    
+    public lazy var modalPresentingHelper = PureModalPresentingHelper(owner: self)
+    
+    public var modalTitle: String?
+    
+    public var modalMessage: String?
+    
+    public var innerView: PureModalView!
+    
+    public typealias InnerView = PureModalView
 }

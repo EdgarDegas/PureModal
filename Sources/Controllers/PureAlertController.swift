@@ -23,24 +23,21 @@ public extension PureAlertControllerDelegate {
 open class PureAlertController: PureModalController {
     
     // MARK: - Variables and Interface
+    
     open override var title: String? {
-        get { return alertTitle }
-        set { alertTitle = newValue }
+        get { return modalTitle }
+        set { modalTitle = newValue }
     }
     
-    public var tintColor: UIColor?
-    public var alertTitle: String?
-    public var alertMessage: String?
     public var alertStyle = PureAlertViewStyle.default(buttonTitle: nil)
     var shouldPresentedAnimated: Bool!
-    var window: UIWindow!
-    var alertView: PureAlertView!
+    
     public weak var delegate: PureAlertControllerDelegate?
     
     convenience public init(withTitle title: String?, message: String?, withStyle style: PureAlertViewStyle?) {
         self.init()
-        alertTitle = title
-        alertMessage = message
+        modalTitle = title
+        modalMessage = message
         if style != nil {
             alertStyle = style!
         }
@@ -53,7 +50,9 @@ open class PureAlertController: PureModalController {
         loadAlertView()
         viewController.present(self, animated: true, completion: nil)
         if shouldPresentedAnimated {
-            animatedFadeIn()
+//            animatedFadeIn()
+            modalPresentingHelper.presentAlert(for: viewController)
+            window.makeKeyAndVisible()
         }
     }
     
@@ -100,16 +99,17 @@ open class PureAlertController: PureModalController {
     }
     
     @objc private func outsideAreaTapped(sender recognizer: UIGestureRecognizer) {
-        delegate?.modalController(self, didTapOuterAreaOfModalView: alertView)
+        delegate?.modalController(self, didTapOuterAreaOfModalView: innerView)
     }
     
     private func loadAlertView() {
-        alertView = PureAlertView(withTitle: alertTitle, message: alertMessage, style: alertStyle)
+        innerView = PureAlertView(withTitle: modalTitle, message: modalMessage, style: alertStyle)
         if let tintColor = tintColor {
-            alertView.tintColor = tintColor
+            innerView.tintColor = tintColor
         }
-        alertView.delegate = self
-        alertView.addTo(view: window.rootViewController!.view)
+        
+        (innerView as! PureAlertView).delegate = self
+        (innerView as! PureAlertView).addTo(view: window.rootViewController!.view)
     }
 }
 
@@ -118,7 +118,7 @@ open class PureAlertController: PureModalController {
 extension PureAlertController {
     private func animatedFadeIn() {
         self.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0)
-        alertView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        innerView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         
         let windowAnimator: UIViewPropertyAnimator = {
             return UIViewPropertyAnimator(duration: 0.16, curve: .easeOut) {
@@ -130,7 +130,7 @@ extension PureAlertController {
             let timeParameters = UISpringTimingParameters(mass: 0.68, stiffness: 120, damping: 16.8, initialVelocity: CGVector(dx: 14, dy: 14))
             let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
             animator.addAnimations {
-                self.alertView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.innerView.transform = CGAffineTransform(scaleX: 1, y: 1)
             }
             return animator
         }()
@@ -140,7 +140,7 @@ extension PureAlertController {
     }
     
     private func animatedFadeOut(completion: (() -> Void)?) {
-        for subview in alertView.subviews {
+        for subview in innerView.subviews {
             subview.isHidden = true
         }
         
@@ -159,8 +159,8 @@ extension PureAlertController {
             let timeParameters = UISpringTimingParameters(mass: 0.1, stiffness: 120, damping: 1000, initialVelocity: CGVector(dx: 8, dy: 8))
             let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
             animator.addAnimations {
-                self.alertView.transform = CGAffineTransform(scaleX: 0.68, y: 0.68)
-                self.alertView.backgroundColor = UIColor(white: 1, alpha: 0)
+                self.innerView.transform = CGAffineTransform(scaleX: 0.68, y: 0.68)
+                self.innerView.backgroundColor = UIColor(white: 1, alpha: 0)
             }
             return animator
         }()

@@ -24,3 +24,13 @@ public protocol PureCardControllerDelegate: PureModalControllerDelegate {
 public protocol PureCardViewDelegate: PureModalViewDelegate {
     func didTapCancelButton(ofCardView cardView: PureCardView)
 }
+
+public protocol PureModal: class {
+    associatedtype InnerView: PureModalView
+    var tintColor: UIColor? { get set }
+    var window: UIWindow! { get }
+    var modalPresentingHelper: PureModalPresentingHelper { get }
+    var modalTitle: String? { get set }
+    var modalMessage: String? { get set }
+    var innerView: InnerView! { get set }
+}

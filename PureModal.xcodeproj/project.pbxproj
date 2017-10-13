@@ -26,6 +26,7 @@
 		B36B90861F5F94DD00D72C94 /* ProtocolsAboutDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B90851F5F94DD00D72C94 /* ProtocolsAboutDrawing.swift */; };
 		B3C64B2E1F5D4FF9000A012E /* PureModalDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C64B2D1F5D4FF9000A012E /* PureModalDemoUITests.swift */; };
 		B3DFB8401F4FC78100B09763 /* PureProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DFB83F1F4FC78100B09763 /* PureProgressView.swift */; };
+		B3E5F1D21F90A93C00BEF298 /* PureModalPresentingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E5F1D11F90A93C00BEF298 /* PureModalPresentingHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		B3C64B2D1F5D4FF9000A012E /* PureModalDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureModalDemoUITests.swift; sourceTree = "<group>"; };
 		B3C64B2F1F5D4FF9000A012E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3DFB83F1F4FC78100B09763 /* PureProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureProgressView.swift; sourceTree = "<group>"; };
+		B3E5F1D11F90A93C00BEF298 /* PureModalPresentingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureModalPresentingHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 		B358410C1F4D10EA007C40F4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				B3E5F1D01F90A92300BEF298 /* Helpers */,
 				B36906471F8C5AAE00AEA7A5 /* Protocols */,
 				B30997371F4D1EB2007570B1 /* Extensions */,
 				B358412E1F4D143B007C40F4 /* Controllers */,
@@ -202,6 +205,14 @@
 				B3C64B2F1F5D4FF9000A012E /* Info.plist */,
 			);
 			path = PureModalDemoUITests;
+			sourceTree = "<group>";
+		};
+		B3E5F1D01F90A92300BEF298 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B3E5F1D11F90A93C00BEF298 /* PureModalPresentingHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -353,6 +364,7 @@
 				B36906531F8C62A100AEA7A5 /* PureCardView.swift in Sources */,
 				B369064F1F8C5EFD00AEA7A5 /* PureModalDelegates+Extensions.swift in Sources */,
 				B36B90861F5F94DD00D72C94 /* ProtocolsAboutDrawing.swift in Sources */,
+				B3E5F1D21F90A93C00BEF298 /* PureModalPresentingHelper.swift in Sources */,
 				B35841301F4D1463007C40F4 /* PureAlertController.swift in Sources */,
 				B35841171F4D11A4007C40F4 /* PureAlertView.swift in Sources */,
 				B3DFB8401F4FC78100B09763 /* PureProgressView.swift in Sources */,
