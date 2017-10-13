@@ -33,4 +33,5 @@ public protocol PureModal: class {
     var modalTitle: String? { get set }
     var modalMessage: String? { get set }
     var innerView: InnerView! { get set }
+    func loadWindow()
 }

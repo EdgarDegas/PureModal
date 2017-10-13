@@ -51,7 +51,6 @@ open class PureAlertController: PureModalController {
         viewController.present(self, animated: true, completion: nil)
         if shouldPresentedAnimated {
             modalPresentingHelper.presentAlert(for: viewController)
-            window.makeKeyAndVisible()
         }
     }
     
@@ -86,9 +85,10 @@ open class PureAlertController: PureModalController {
         }
     }
     
+    
     // MARK: - Initialization
     
-    private func loadWindow() {
+    public override func loadWindow() {
         window = {
             let window = UIWindow(frame: UIScreen.main.bounds)
             window.windowLevel = UIWindowLevelAlert

@@ -9,6 +9,10 @@
 import UIKit
 
 open class PureModalController: UIViewController, PureModal {
+    public func loadWindow() {
+        fatalError("Must inherit.")
+    }
+    
     public var tintColor: UIColor?
     
     public var window: UIWindow!
