@@ -50,7 +50,6 @@ open class PureAlertController: PureModalController {
         loadAlertView()
         viewController.present(self, animated: true, completion: nil)
         if shouldPresentedAnimated {
-//            animatedFadeIn()
             modalPresentingHelper.presentAlert(for: viewController)
             window.makeKeyAndVisible()
         }
@@ -65,15 +64,19 @@ open class PureAlertController: PureModalController {
 
     open override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         if flag {
-            animatedFadeOut(completion: completion)
+            modalPresentingHelper.dismissAlert(completion: completion)
         } else {
             window = nil
             super.dismiss(animated: false, completion: completion)
         }
     }
     
+    /// Dismiss alert view with animation.
+    ///
+    /// To avoid animation, use dismiss(animated:completion:) instead.
+    /// - Parameter completion: Block of code executed upon animation finished.
     open func dismiss(completion: (() -> Void)? = nil) {
-        animatedFadeOut(completion: completion)
+        dismiss(animated: true, completion: completion)
     }
     
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -110,63 +113,6 @@ open class PureAlertController: PureModalController {
         
         (innerView as! PureAlertView).delegate = self
         (innerView as! PureAlertView).addTo(view: window.rootViewController!.view)
-    }
-}
-
-
-// MARK: - Pure alert fade animation
-extension PureAlertController {
-    private func animatedFadeIn() {
-        self.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0)
-        innerView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-        
-        let windowAnimator: UIViewPropertyAnimator = {
-            return UIViewPropertyAnimator(duration: 0.16, curve: .easeOut) {
-                self.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.6)
-            }
-        }()
-        
-        let alertViewAnimator: UIViewPropertyAnimator = {
-            let timeParameters = UISpringTimingParameters(mass: 0.68, stiffness: 120, damping: 16.8, initialVelocity: CGVector(dx: 14, dy: 14))
-            let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
-            animator.addAnimations {
-                self.innerView.transform = CGAffineTransform(scaleX: 1, y: 1)
-            }
-            return animator
-        }()
-        
-        windowAnimator.startAnimation()
-        alertViewAnimator.startAnimation()
-    }
-    
-    private func animatedFadeOut(completion: (() -> Void)?) {
-        for subview in innerView.subviews {
-            subview.isHidden = true
-        }
-        
-        let windowAnimator: UIViewPropertyAnimator = {
-            let animator = UIViewPropertyAnimator(duration: 0.16, curve: .easeOut) {
-                self.window.rootViewController!.view.backgroundColor = UIColor(white: 0, alpha: 0)
-            }
-            animator.addCompletion { _ in
-                self.window = nil
-                super.dismiss(animated: false, completion: completion)
-            }
-            return animator
-        }()
-        
-        let alertViewAnimator: UIViewPropertyAnimator = {
-            let timeParameters = UISpringTimingParameters(mass: 0.1, stiffness: 120, damping: 1000, initialVelocity: CGVector(dx: 8, dy: 8))
-            let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
-            animator.addAnimations {
-                self.innerView.transform = CGAffineTransform(scaleX: 0.68, y: 0.68)
-                self.innerView.backgroundColor = UIColor(white: 1, alpha: 0)
-            }
-            return animator
-        }()
-
-        windowAnimator.startAnimation()
-        alertViewAnimator.startAnimation()
     }
 }
 
