@@ -8,6 +8,11 @@
 
 import Foundation
 
+public enum PureModalBackgroundRenderMode {
+    case obscure
+    case motionBlur
+}
+
 public class PureModalPresentingHelper {
     weak var owner: PureModalController?
     
@@ -16,6 +21,10 @@ public class PureModalPresentingHelper {
     }
     
     func presentAlert(for controller: UIViewController) {
+        presentAlert(for: controller, withBackgroundRenderMode: .obscure)
+    }
+    
+    func presentAlert(for controller: UIViewController, withBackgroundRenderMode backgroundRenderMode: PureModalBackgroundRenderMode) {
         guard let alertController = owner else {
             return
         }
@@ -28,7 +37,7 @@ public class PureModalPresentingHelper {
                 alertController.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.6)
             }
         }()
-
+        
         let alertViewAnimator: UIViewPropertyAnimator = {
             let timeParameters = UISpringTimingParameters(mass: 0.68, stiffness: 120, damping: 16.8, initialVelocity: CGVector(dx: 14, dy: 14))
             let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
@@ -83,11 +92,11 @@ public class PureModalPresentingHelper {
         
     }
     
-    private func motionBlurBackground() {
+    private func prominentBlurBackground() {
         
     }
     
-    private func recoverMotionBluredBackground() {
+    private func recoverProminentBluredBackground() {
         
     }
 }
