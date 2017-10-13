@@ -74,4 +74,20 @@ public class PureModalPresentingHelper {
         windowAnimator.startAnimation()
         alertViewAnimator.startAnimation()
     }
+    
+    private func obscuresBackground() {
+        
+    }
+    
+    private func recoverObscuredBackground() {
+        
+    }
+    
+    private func motionBlurBackground() {
+        
+    }
+    
+    private func recoverMotionBluredBackground() {
+        
+    }
 }
