@@ -10,33 +10,23 @@ import Foundation
 
 public enum PureModalBackgroundRenderMode {
     case obscure
-    case motionBlur
+    case prominentBlur
 }
 
 public class PureModalPresentingHelper {
     weak var owner: PureModalController?
-    
-    init(owner: PureModalController) {
+    private var backgroundRenderMode: PureModalBackgroundRenderMode
+
+    init(owner: PureModalController, withBackgroundRenderMode mode: PureModalBackgroundRenderMode) {
         self.owner = owner
+        self.backgroundRenderMode = mode
     }
     
     func presentAlert(for controller: UIViewController) {
-        presentAlert(for: controller, withBackgroundRenderMode: .obscure)
-    }
-    
-    func presentAlert(for controller: UIViewController, withBackgroundRenderMode backgroundRenderMode: PureModalBackgroundRenderMode) {
         guard let alertController = owner else {
             return
         }
-        
-        alertController.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0)
         alertController.innerView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-        
-        let windowAnimator: UIViewPropertyAnimator = {
-            return UIViewPropertyAnimator(duration: 0.16, curve: .easeOut) {
-                alertController.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.6)
-            }
-        }()
         
         let alertViewAnimator: UIViewPropertyAnimator = {
             let timeParameters = UISpringTimingParameters(mass: 0.68, stiffness: 120, damping: 16.8, initialVelocity: CGVector(dx: 14, dy: 14))
@@ -47,7 +37,12 @@ public class PureModalPresentingHelper {
             return animator
         }()
         
-        windowAnimator.startAnimation()
+        switch backgroundRenderMode {
+        case .obscure:
+            obscureBackground(for: alertController)
+        case .prominentBlur:
+            prominentBlurBackground(for: alertController)
+        }
         alertViewAnimator.startAnimation()
     }
     
@@ -58,18 +53,7 @@ public class PureModalPresentingHelper {
         for subview in alertController.innerView.subviews {
             subview.isHidden = true
         }
-        
-        let windowAnimator: UIViewPropertyAnimator = {
-            let animator = UIViewPropertyAnimator(duration: 0.16, curve: .easeOut) {
-                alertController.window.rootViewController!.view.backgroundColor = UIColor(white: 0, alpha: 0)
-            }
-            animator.addCompletion { _ in
-                alertController.window = nil
-                alertController.dismiss(animated: false, completion: completion)
-            }
-            return animator
-        }()
-        
+
         let alertViewAnimator: UIViewPropertyAnimator = {
             let timeParameters = UISpringTimingParameters(mass: 0.1, stiffness: 120, damping: 1000, initialVelocity: CGVector(dx: 8, dy: 8))
             let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timeParameters)
@@ -80,23 +64,45 @@ public class PureModalPresentingHelper {
             return animator
         }()
         
-        windowAnimator.startAnimation()
+        switch backgroundRenderMode {
+        case .obscure:
+            recoverObscuredBackground(for: alertController, completion: completion)
+        case .prominentBlur:
+            recoverProminentBluredBackground(for: alertController, completion: completion)
+        }
         alertViewAnimator.startAnimation()
     }
     
-    private func obscuresBackground() {
+    
+    private func obscureBackground(for controller: PureModalController) {
+        controller.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0)
+        let windowAnimator: UIViewPropertyAnimator = {
+            return UIViewPropertyAnimator(duration: 0.16, curve: .easeOut) {
+                controller.window.rootViewController?.view.backgroundColor = UIColor(white: 0, alpha: 0.6)
+            }
+        }()
+        windowAnimator.startAnimation()
+    }
+    
+    private func recoverObscuredBackground(for controller: PureModalController, completion: (() -> Void)?) {
+        let windowAnimator: UIViewPropertyAnimator = {
+            let animator = UIViewPropertyAnimator(duration: 0.16, curve: .easeOut) {
+                controller.window.rootViewController!.view.backgroundColor = UIColor(white: 0, alpha: 0)
+            }
+            animator.addCompletion { _ in
+                controller.window = nil
+                controller.dismiss(animated: false, completion: completion)
+            }
+            return animator
+        }()
+        windowAnimator.startAnimation()
+    }
+    
+    private func prominentBlurBackground(for controller: PureModalController) {
         
     }
     
-    private func recoverObscuredBackground() {
-        
-    }
-    
-    private func prominentBlurBackground() {
-        
-    }
-    
-    private func recoverProminentBluredBackground() {
+    private func recoverProminentBluredBackground(for controller: PureModalController, completion: (() -> Void)?) {
         
     }
 }
